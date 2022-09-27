@@ -2,16 +2,16 @@ package com.deloitte.hackaton;
 
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.user.JSONUserData;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
+import java.time.Duration;
 import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.startNewUserTest;
@@ -20,18 +20,17 @@ public class RegisterTestSuite {
 
     WebDriver driver;
 
-    @Test
-    public void test(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://demowebshop.tricentis.com/register");
-        WebElement element = driver.findElement(By.xpath("//form[@action=\"/register\"]//input[@value=\"M\"]"));
-        element.click();
+    @BeforeAll
+    static void setupAll(){
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
     void setup(){
-        System.setProperty("webdriver.chrome.driver", "C:/Users/aromanowski/Desktop/chromedriver.exe");
         this.driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
     }
 
     @ParameterizedTest

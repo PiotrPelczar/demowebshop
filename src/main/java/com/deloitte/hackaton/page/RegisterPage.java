@@ -1,6 +1,7 @@
 package com.deloitte.hackaton.page;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -60,7 +61,6 @@ public class RegisterPage {
     @Step("Open register page")
     public RegisterPage openRegisterPage(){
         driver.get("https://demowebshop.tricentis.com/register");
-        System.out.println(firstNameInput);
         return this;
     }
 
