@@ -2,7 +2,6 @@ package com.deloitte.hackaton;
 
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.user.JSONUserData;
-import com.deloitte.hackaton.page.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,13 +10,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 import java.time.Duration;
 import java.util.stream.Stream;
 
+import static com.deloitte.hackaton.utils.TestFactory.startNewLoginTest;
 import static com.deloitte.hackaton.utils.TestFactory.startNewUserTest;
 
-public class RegisterTestSuite {
+public class LoginTestSuite {
 
     WebDriver driver;
 
@@ -36,23 +35,20 @@ public class RegisterTestSuite {
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void register(JSONUserData userData){
-       startNewUserTest(driver, userData)
-               .openRegisterPage()
-               .selectGender()
-               .typeFirstName()
-               .typeLastName()
-               .typeEmail()
-               .typePassword()
-               .repeatPassword()
-               .register()
-               .verifyRegistration()
-               .logOut()
-               .verifyIfLoggedOut();
+    void login(JSONUserData userData){
+        startNewLoginTest(driver, userData)
+                .openLoginPage()
+                .typeEmail()
+                .typePassword()
+                .logIn()
+                .verifyLogin();
+        startNewUserTest(driver, userData)
+                .logOut()
+                .verifyIfLoggedOut();
     }
-
 
     private static Stream<JSONUserData> usersDataStream() {
         return JSONDataReader.readUsers().getUsers().stream();
     }
+
 }

@@ -1,10 +1,8 @@
 package com.deloitte.hackaton.page;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import org.openqa.selenium.support.PageFactory;
