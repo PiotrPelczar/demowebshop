@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Objects;
 
-public class RegisterPage {
+public class RegisterPage extends UserAbstract{
 
     @FindBy(xpath = "//form[@action=\"/register\"]//input[@value=\"M\"]")
     WebElement genderRadio;
@@ -34,27 +34,9 @@ public class RegisterPage {
     @FindBy(xpath = "//*[@id=\"register-button\"]")
     WebElement registerButton;
 
-    @FindBy(xpath = "//a[@href = \"/logout\"]")
-    WebElement logoutButton;
-
-    WebDriver driver;
-    JSONUserData userData;
-
-
     public RegisterPage(WebDriver driver, JSONUserData userData){
-        this.driver = driver;
-        this.userData = userData;
-        PageFactory.initElements(driver, this);
+       super(driver, userData);
     }
-
-    protected JSONUserData getUserData() {
-        if (Objects.isNull(this.userData)) {
-            throw new IllegalArgumentException("User data must not be null!");
-        }
-        return this.userData;
-    }
-
-
 
     @Step("Open register page")
     public RegisterPage openRegisterPage(){
@@ -112,19 +94,6 @@ public class RegisterPage {
     @Step("Assert if user account has been created")
     public RegisterPage verifyRegistration(){
         assertTrue(driver.getCurrentUrl().contains("registerresult"));
-        return this;
-    }
-
-    @Step("Log out")
-    public RegisterPage logOut(){
-        logoutButton.click();
-        return this;
-    }
-
-    @Step
-    public RegisterPage verifyIfLoggedOut(){
-        driver.get("https://demowebshop.tricentis.com/customer/info");
-        assertTrue(driver.getCurrentUrl().contains("/login"));
         return this;
     }
 

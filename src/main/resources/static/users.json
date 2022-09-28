@@ -1,22 +1,15 @@
 {
   "users": [
     {
-      "firstname": "testFirstName",
+      "firstname": "adamTest123",
       "lastname": "testLastName",
-      "email": "testemail@email.com",
-      "password": "password123"
-    },
-    {
-      "firstname": "testFirstName1",
-      "lastname": "testLastName1",
-      "email": "testemail1@email.com",
-      "password": "password123"
-    },
-    {
-      "firstname": "testFirstName1234123",
-      "lastname": "testLastName123213213",
-      "email": "testemail4444442@email.com",
-      "password": "password123"
+      "email": "adamtest123@email.com",
+      "password": "password123",
+      "country" : "Poland",
+      "city" : "Warsaw",
+      "address_1": "address",
+      "post_code": "00-000",
+      "phone_number": "123123123"
     }
   ]
 }

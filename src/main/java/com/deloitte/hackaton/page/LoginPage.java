@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Objects;
 
-public class LoginPage {
+public class LoginPage extends UserAbstract{
 
     @FindBy(xpath = "//*[@id=\"Email\"]")
     WebElement emailInput;
@@ -26,21 +26,9 @@ public class LoginPage {
     @FindBy(xpath = "//a[@href = \"/logout\"]")
     WebElement logoutButton;
 
-    WebDriver driver;
-
-    JSONUserData userData;
 
     public LoginPage(WebDriver driver, JSONUserData userData){
-        this.driver = driver;
-        this.userData = userData;
-        PageFactory.initElements(driver, this);
-    }
-
-    protected JSONUserData getUserData() {
-        if (Objects.isNull(this.userData)) {
-            throw new IllegalArgumentException("User data must not be null!");
-        }
-        return this.userData;
+        super(driver, userData);
     }
 
 
@@ -90,5 +78,6 @@ public class LoginPage {
         assertTrue(driver.getCurrentUrl().contains("/login"));
         return this;
     }
+
 
 }

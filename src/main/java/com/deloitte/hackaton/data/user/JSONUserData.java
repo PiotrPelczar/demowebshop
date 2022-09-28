@@ -22,6 +22,21 @@ public class JSONUserData {
     @JsonProperty("password")
     private String password;
 
+    @JsonProperty("country")
+    private String country;
+
+    @JsonProperty("city")
+    private String City;
+
+    @JsonProperty("address_1")
+    private String address_1;
+
+    @JsonProperty("post_code")
+    private String postCode;
+
+    @JsonProperty("phone_number")
+    private String phoneNumber;
+
     @Override
     public String toString() {
         return "JSONUserData{" +
