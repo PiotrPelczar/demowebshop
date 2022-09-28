@@ -28,6 +28,8 @@ public class JSONDataReader {
         }
     }
 
+<<<<<<< HEAD
+=======
     public static JSONUserList readRegisterUsers() {
         var resource = getRegisterUsersFileFromClasspath();
         System.out.println(resource);
@@ -43,11 +45,16 @@ public class JSONDataReader {
 
 
 
+>>>>>>> origin
     private static Resource getUsersFileFromClasspath() {
         return new ClassPathResource("/static/users.json");
     }
 
+<<<<<<< HEAD
+
+=======
     private static Resource getRegisterUsersFileFromClasspath(){
         return new ClassPathResource("/static/registerUsers.json");
     }
+>>>>>>> origin
 }
