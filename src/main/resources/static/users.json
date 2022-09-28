@@ -1,15 +1,15 @@
 {
   "users": [
     {
-      "firstname": "adamTest123",
-      "lastname": "testLastName",
+      "firstName": "adamTest123",
+      "lastName": "testLastName",
       "email": "adamtest123@email.com",
       "password": "password123",
       "country" : "Poland",
       "city" : "Warsaw",
       "address_1": "address",
-      "post_code": "00-000",
-      "phone_number": "123123123"
+      "postCode": "00-000",
+      "phoneNumber": 123123123
     }
   ]
 }

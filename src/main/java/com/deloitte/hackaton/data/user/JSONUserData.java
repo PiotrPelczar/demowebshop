@@ -10,10 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class JSONUserData {
 
-    @JsonProperty("firstname")
+    @JsonProperty("firstName")
     private String firstName;
 
-    @JsonProperty("lastname")
+    @JsonProperty("lastName")
     private String lastName;
 
     @JsonProperty("email")
@@ -26,15 +26,15 @@ public class JSONUserData {
     private String country;
 
     @JsonProperty("city")
-    private String City;
+    private String city;
 
     @JsonProperty("address_1")
     private String address_1;
 
-    @JsonProperty("post_code")
+    @JsonProperty("postCode")
     private String postCode;
 
-    @JsonProperty("phone_number")
+    @JsonProperty("phoneNumber")
     private String phoneNumber;
 
     @Override

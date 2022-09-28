@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class CustomerInfoPage extends UserAbstract{
 
     @FindBy(xpath = "//ul[@class=\"list\"]//a[@href=\"/customer/addresses\"]")
@@ -48,6 +50,8 @@ public class CustomerInfoPage extends UserAbstract{
     public CustomerInfoPage(WebDriver driver, JSONUserData userData){
       super(driver, userData);
     }
+
+
 
     @Step("Verify if user has any address saved")
     public boolean verifyAddress(){
@@ -125,6 +129,12 @@ public class CustomerInfoPage extends UserAbstract{
     @Step("Add new address")
     public CustomerInfoPage addAddress(){
         saveButton.click();
+        return this;
+    }
+
+    @Step("Verify if address has been added")
+    public CustomerInfoPage verifyIfAdded(){
+        assertEquals(driver.getCurrentUrl(), "https://demowebshop.tricentis.com/customer/addresses");
         return this;
     }
 

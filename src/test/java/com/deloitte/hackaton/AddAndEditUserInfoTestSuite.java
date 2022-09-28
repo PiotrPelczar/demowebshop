@@ -3,6 +3,7 @@ package com.deloitte.hackaton;
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,15 +34,15 @@ public class AddAndEditUserInfoTestSuite {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
     }
-//
-//    @AfterEach
-//    void tearDown() {
-//        this.driver.quit();
-//    }
+
+    @AfterEach
+    void tearDown() {
+        this.driver.quit();
+    }
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void addUserData(JSONUserData userData){
+    void addAndDeleteUserData(JSONUserData userData){
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
@@ -51,7 +52,7 @@ public class AddAndEditUserInfoTestSuite {
         startNewCustomerInfoTest(driver, userData).openAddressPage();
         boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
         System.out.println(isTrue);
-        if(!isTrue == true) {
+        if(!isTrue) {
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()
@@ -62,11 +63,11 @@ public class AddAndEditUserInfoTestSuite {
                     .typeAddress1()
                     .typePostalCode()
                     .typePhoneNumber()
-                    .addAddress();
+                    .addAddress()
+                    .verifyIfAdded();
         }
             startNewCustomerInfoTest(driver, userData)
                     .deleteAddress();
-
     }
 
     private static Stream<JSONUserData> usersDataStream() {

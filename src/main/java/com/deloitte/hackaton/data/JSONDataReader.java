@@ -17,6 +17,7 @@ public class JSONDataReader {
 
     public static JSONUserList readUsers() {
         var resource = getUsersFileFromClasspath();
+        System.out.println(resource);
         if (!resource.exists()) {
             throw new InvalidArgumentException("/static/users.json file not found!");
         }
@@ -27,8 +28,26 @@ public class JSONDataReader {
         }
     }
 
+    public static JSONUserList readRegisterUsers() {
+        var resource = getRegisterUsersFileFromClasspath();
+        System.out.println(resource);
+        if (!resource.exists()) {
+            throw new InvalidArgumentException("/static/registerUsers.json file not found!");
+        }
+        try {
+            return mapper.readValue(resource.getFile(), JSONUserList.class);
+        } catch (IOException e) {
+            throw new InvalidArgumentException("Can not read /static/registerUsers.json file!");
+        }
+    }
+
+
 
     private static Resource getUsersFileFromClasspath() {
         return new ClassPathResource("/static/users.json");
+    }
+
+    private static Resource getRegisterUsersFileFromClasspath(){
+        return new ClassPathResource("/static/registerUsers.json");
     }
 }
