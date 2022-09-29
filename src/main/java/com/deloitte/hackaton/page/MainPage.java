@@ -29,7 +29,7 @@ public class MainPage extends UserAbstract {
     @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[1]/a/img")
     WebElement blueAndGreenSneaker;
 
-    @FindBy(xpath = "//a[@href=\"/141-inch-laptop\"]")
+    @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[2]/h2/a")
     WebElement laptop14inch;
 
     @FindBy(id = "add-to-cart-button-31")

@@ -76,7 +76,9 @@ public class BuyProducts {
         checkout(driver, userData)
                 .clickThroughPaymentMethods()
                 .confirm()
-                .validateName();
+                .validateBillingInfo()
+                .validateShippingInfo();
+
 
 
 
@@ -120,7 +122,15 @@ public class BuyProducts {
                 .selectSize()
                 .addToCart();
         cart(driver, userData)
-                .goToCart();
+                .goToCart()
+                .clickTerms()
+                .clickCheckout();
+        checkout(driver, userData)
+                .clickThroughPaymentMethods()
+                .confirm()
+                .validateBillingInfo()
+                .validateShippingInfo();
+        //        .validateProductInfoBGSneaker();
 
 
     }
@@ -156,7 +166,14 @@ public class BuyProducts {
                 .searchFor14laptop()
                 .laptop14inchAddToCart();
         cart(driver, userData)
-                .goToCart();
+                .goToCart()
+                .clickTerms()
+                .clickCheckout();
+        checkout(driver, userData)
+                .clickThroughPaymentMethods()
+                .confirm()
+                .validateBillingInfo()
+                .validateShippingInfo();
     }
 
 
@@ -189,8 +206,6 @@ public class BuyProducts {
         mainPage(driver, userData)
                 .navigateToMainPage();
     }
-
-
 
     private static Stream<JSONUserData> usersDataStream () {
         return JSONDataReader.readUsers().getUsers().stream();

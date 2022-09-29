@@ -52,6 +52,7 @@ public class TestFactory {
         return new Checkout(driver, userData);
     }
 
+
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new ProductPage(driver, productData, userData);
     }
