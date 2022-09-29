@@ -1,0 +1,10 @@
+{
+  "products": [
+    {
+      "name": "Blue Jeans",
+      "url": "blue-jeans",
+      "quantity": 12,
+      "available": true
+    }
+  ]
+}

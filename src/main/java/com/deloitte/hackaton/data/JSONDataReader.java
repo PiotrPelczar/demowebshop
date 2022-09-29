@@ -1,5 +1,6 @@
 package com.deloitte.hackaton.data;
 
+import com.deloitte.hackaton.data.product.JSONProductList;
 import com.deloitte.hackaton.data.user.JSONUserList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.var;
@@ -41,6 +42,18 @@ public class JSONDataReader {
         }
     }
 
+    public static JSONProductList readProducts() {
+        var resource = getProductsFileFromClasspath();
+        if (!resource.exists()) {
+            throw new InvalidArgumentException("/static/products.json file not found!");
+        }
+        try {
+            return mapper.readValue(resource.getFile(), JSONProductList.class);
+        } catch (IOException e) {
+            throw new InvalidArgumentException("Can not read /static/products.json file!");
+        }
+    }
+
     private static Resource getUsersFileFromClasspath() {
         return new ClassPathResource("/static/users.json");
     }
@@ -48,6 +61,10 @@ public class JSONDataReader {
 
     private static Resource getRegisterUsersFileFromClasspath(){
         return new ClassPathResource("/static/registerUsers.json");
+    }
+
+    private static Resource getProductsFileFromClasspath() {
+        return new ClassPathResource("/static/products.json");
     }
 
 }
