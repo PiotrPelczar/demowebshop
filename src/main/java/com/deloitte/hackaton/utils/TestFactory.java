@@ -1,14 +1,14 @@
 package com.deloitte.hackaton.utils;
-
+import com.deloitte.hackaton.data.user.JSONInvalidEmails;
 import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
-
 import com.deloitte.hackaton.page.*;
-
+import com.deloitte.hackaton.data.user.UserDataRandomizer;
 import com.deloitte.hackaton.page.CustomerInfoPage;
 import com.deloitte.hackaton.page.LoginPage;
 import com.deloitte.hackaton.page.RegisterPage;
 import org.openqa.selenium.WebDriver;
+
 
 public class TestFactory {
 
@@ -18,6 +18,14 @@ public class TestFactory {
 
     public static LoginPage startNewLoginTest(WebDriver driver, JSONUserData userData) {
         return new LoginPage(driver, userData);
+    }
+
+    public static NewsletterPage startNewNewsletterNegativeTest(WebDriver driver, JSONInvalidEmails mailData){
+        return new NewsletterPage(driver, mailData);
+    }
+
+    public static UserDataRandomizer startRandomizer(){
+        return new UserDataRandomizer();
     }
 
     public static MainPage mainPage(WebDriver driver, JSONUserData userData) {
@@ -37,6 +45,7 @@ public class TestFactory {
 
     public static SneakersProductPage blueAndGreenSneaker(WebDriver driver, JSONUserData userData) {
         return new SneakersProductPage(driver, userData);
+
     }
 
     public static CustomerInfoPage startNewCustomerInfoTest(WebDriver driver, JSONUserData userData) {
@@ -47,5 +56,6 @@ public class TestFactory {
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new ProductPage(driver, productData, userData);
     }
+
 }
 

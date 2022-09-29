@@ -1,12 +1,12 @@
 package com.deloitte.hackaton.data;
 
+import com.deloitte.hackaton.data.user.JSONInvalidEmailList;
 import com.deloitte.hackaton.data.product.JSONProductList;
 import com.deloitte.hackaton.data.user.JSONUserList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.var;
 import org.openqa.selenium.InvalidArgumentException;
 import org.springframework.core.io.*;
-
 import java.io.IOException;
 
 
@@ -29,6 +29,19 @@ public class JSONDataReader {
         }
     }
 
+    public static JSONInvalidEmailList readInvalidEmail() {
+        var resource = getInvalidEmailFileFromClasspath();
+        System.out.println(resource);
+        if (!resource.exists()) {
+            throw new InvalidArgumentException("/static/invalidEmails.json file not found!");
+        }
+        try {
+            return mapper.readValue(resource.getFile(), JSONInvalidEmailList.class);
+        } catch (IOException e) {
+            throw new InvalidArgumentException("Can not read /static/invalidEmails.json file!");
+        }
+    }
+
     public static JSONUserList readRegisterUsers() {
         var resource = getRegisterUsersFileFromClasspath();
         System.out.println(resource);
@@ -41,7 +54,6 @@ public class JSONDataReader {
             throw new InvalidArgumentException("Can not read /static/registerUsers.json file!");
         }
     }
-
     public static JSONProductList readProducts() {
         var resource = getProductsFileFromClasspath();
         if (!resource.exists()) {
@@ -54,8 +66,13 @@ public class JSONDataReader {
         }
     }
 
+
     private static Resource getUsersFileFromClasspath() {
         return new ClassPathResource("/static/users.json");
+    }
+
+    private static Resource getInvalidEmailFileFromClasspath() {
+        return new ClassPathResource("/static/invalidEmails.json");
     }
 
 

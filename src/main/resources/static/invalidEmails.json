@@ -1,0 +1,28 @@
+{
+  "invalidEmails": [
+    {
+      "emails": "email.com"
+    },
+    {
+      "emails": "email@email"
+    },
+    {
+      "emails" : "email@email..com"
+    },
+    {
+      "emails" : "email%email.com"
+    },
+    {
+      "emails" : "@email.com"
+    },
+    {
+      "emails" : "@email"
+    },
+    {
+      "emails" : "email,e@email.com"
+    },
+    {
+      "emails" : "email@.com"
+    }
+  ]
+}
