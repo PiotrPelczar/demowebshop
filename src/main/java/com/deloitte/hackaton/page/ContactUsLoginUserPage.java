@@ -6,9 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.security.PublicKey;
-import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ContactUsLoginUserPage extends UserAbstract{

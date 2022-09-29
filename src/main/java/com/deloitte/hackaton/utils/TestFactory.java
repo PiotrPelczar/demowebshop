@@ -1,16 +1,12 @@
 package com.deloitte.hackaton.utils;
 
 import com.deloitte.hackaton.data.user.JSONUserData;
-<<<<<<< HEAD
 
 import com.deloitte.hackaton.page.*;
 
-=======
-import com.deloitte.hackaton.data.user.UserDataRandomizer;
 import com.deloitte.hackaton.page.CustomerInfoPage;
 import com.deloitte.hackaton.page.LoginPage;
 import com.deloitte.hackaton.page.RegisterPage;
->>>>>>> origin
 import org.openqa.selenium.WebDriver;
 
 public class TestFactory {
@@ -34,12 +30,7 @@ public class TestFactory {
         return new CustomerInfoPage(driver, userData);
     }
 
-<<<<<<< HEAD
-=======
-    public static UserDataRandomizer startRandomizer(){
-        return new UserDataRandomizer();
-    }
->>>>>>> origin
+
 
 }
 

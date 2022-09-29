@@ -5,11 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import com.deloitte.hackaton.data.user.JSONUserData;
-import org.openqa.selenium.support.PageFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Objects;
 
 public class RegisterPage extends UserAbstract{
 
