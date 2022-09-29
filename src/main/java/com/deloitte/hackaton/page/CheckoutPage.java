@@ -68,14 +68,85 @@ public class CheckoutPage extends ProductAbstract{
     @FindBy(xpath = "//td[@class=\"qty nobr\"]/span[not(@class)]")
     WebElement quantity;
 
+    @FindBy(xpath = "//input[@onclick=\"Billing.save()\"]")
+    WebElement clickBillingAddress;
+
+    @FindBy(xpath = "//input[@onclick=\"Shipping.save()\"]")
+    WebElement clickShippingAddress;
+
+    @FindBy(xpath = "//input[@onclick=\"ShippingMethod.save()\"]")
+    WebElement clickShippingMethod;
+
+    @FindBy (xpath = "//input[@value=\"Payments.CashOnDelivery\"]")
+    WebElement paymentMethodCOD;
+
+    @FindBy(xpath = "//input[@onclick=\"PaymentMethod.save()\"]")
+    WebElement clickPaymentMethod;
+    @FindBy(xpath = "//input[@onclick=\"PaymentInfo.save()\"]")
+    WebElement clickPaymentInfo;
+
+    @FindBy(xpath = "//input[@onclick=\"ConfirmOrder.save()\"]")
+    WebElement clickConfirmOrder;
+
+    @FindBy(xpath = "//li/a[contains(@href, \"/orderdetails\")]")
+    WebElement orderDetails;
+
+    @FindBy(xpath = "//ul[@class=\"billing-info\"]/li[@class=\"name\"]")
+    WebElement nameDetailsBilling;
+
+    @FindBy (xpath = "//ul[@class=\"billing-info\"]/li[@class=\"email\"]")
+    WebElement emailDetailsBilling;
+
+    @FindBy (xpath = "//ul[@class=\"billing-info\"]/li[@class=\"phone\"]")
+    WebElement phoneDetailsBilling;
+
+    @FindBy (xpath = "//ul[@class=\"billing-info\"]/li[@class=\"city-state-zip\"]")
+    WebElement cityStateZipDetailsBilling;
+
+    @FindBy (xpath = "//ul[@class=\"billing-info\"]/li[@class=\"country\"]")
+    WebElement countryDetailsBilling;
+
+    @FindBy (xpath = "//ul[@class=\"billing-info\"]/li[@class=\"payment-method\"]")
+    WebElement paymentDetailsBilling;
+
+    @FindBy(xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"name\"]")
+    WebElement nameDetailsShipping;
+
+    @FindBy (xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"email\"]")
+    WebElement emailDetailsShipping;
+
+    @FindBy (xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"phone\"]")
+    WebElement phoneDetailsShipping;
+
+    @FindBy (xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"city-state-zip\"]")
+    WebElement cityStateZipDetailsShipping;
+
+    @FindBy (xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"country\"]")
+    WebElement countryDetailsShipping;
+
+    @FindBy (xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"shipping-method\"]")
+    WebElement methodDetailsShipping;
 
 
-    JSONUserData userData;
+
     public CheckoutPage(WebDriver driver, JSONProductData productData, JSONUserData userData) {
         super(driver, productData);
         this.userData = userData;
     }
 
+    @Step("Click Order details and validate order")
+    public CheckoutPage clickThroughPaymentMethods() {
+        clickBillingAddress.click();
+        clickShippingAddress.click();
+        groundShippingMethod.click();
+//        arrayCheckout.add(shippingGroundLabel.getText());
+        clickShippingMethod.click();
+        paymentMethodCOD.click();
+//        arrayCheckout.add(paymentMethodCODLabel.getText());
+        clickPaymentMethod.click();
+        clickPaymentInfo.click();
+        return this;
+    }
     @Step
     public CheckoutPage chooseNewBillingAddress(){
         Select billingAddressSelectDropdown = new Select(billingAddressSelect);
@@ -86,44 +157,80 @@ public class CheckoutPage extends ProductAbstract{
     }
 
     @Step
-    public CheckoutPage addNewAddressData(){
+    public CheckoutPage addNewAddressData() throws InterruptedException {
         Select billingAddressCountrySelectDropdown = new Select(billingAddressCountry);
         billingAddressCountrySelectDropdown.selectByVisibleText("Canada");
         city.sendKeys("Toronto");
         address_1.sendKeys("address1");
         postCode.sendKeys("93-120");
         phoneNumber.sendKeys("123321123");
+        Thread.sleep(1000);
         billingContinueButton.click();
         return this;
     }
 
     @Step
-    public CheckoutPage selectShippingAddress(){
+    public CheckoutPage selectShippingAddress() throws InterruptedException {
         shippingAddress.click();
+        Thread.sleep(1000);
         shippingContinueButton.click();
         return this;
     }
 
     @Step
-    public CheckoutPage selectShippingMethod(){
+    public CheckoutPage selectShippingMethod() throws InterruptedException {
         groundShippingMethod.click();
+        Thread.sleep(1000);
         shippingMethodContinueButton.click();
         return this;
     }
 
     @Step
-    public CheckoutPage selectPaymentMethod(){
+    public CheckoutPage selectPaymentMethod() throws InterruptedException {
         paymentMethod.click();
+        Thread.sleep(1000);
         paymentMethodContinueButton.click();
         return this;
     }
 
     @Step
-    public CheckoutPage typePurchaseOrderNumber(){
+    public CheckoutPage typePurchaseOrderNumber() throws InterruptedException {
         purchaseOrderNumber.sendKeys("0001");
+        Thread.sleep(1000);
         purchaseOrderNumberContinueButton.click();
         return this;
     }
+
+    @Step("Click Order details and validate order")
+    public CheckoutPage validateBillingInfo() {
+        assertTrue(nameDetailsBilling.getText().contains(getUserData().getFirstName()));
+        assertTrue(nameDetailsBilling.getText().contains(getUserData().getLastName()));
+        assertTrue(emailDetailsBilling.getText().contains(getUserData().getEmail()));
+        assertEquals(phoneDetailsBilling.getText().replaceAll("[^0-9]", ""), getUserData().getPhoneNumber());
+        assertTrue(cityStateZipDetailsBilling.getText().contains(getUserData().getCity()));
+        assertTrue(cityStateZipDetailsBilling.getText().contains(getUserData().getPostCode()));
+        assertTrue(countryDetailsBilling.getText().contains(getUserData().getCountry()));
+//        String paymentCODFromArray = arrayCheckout.get(1);
+//        String paymentCOD[] = paymentCODFromArray.split(" ");
+//        assertTrue(paymentDetailsBilling.getText().contains(paymentCOD[0]));
+        return this;
+    }
+
+    @Step("Click Order details and validate order")
+    public CheckoutPage validateShippingInfo() {
+        assertTrue(nameDetailsShipping.getText().contains(getUserData().getFirstName()));
+        assertTrue(nameDetailsShipping.getText().contains(getUserData().getLastName()));
+        assertTrue(emailDetailsShipping.getText().contains(getUserData().getEmail()));
+        assertEquals(phoneDetailsShipping.getText().replaceAll("[^0-9]", ""), getUserData().getPhoneNumber());
+        assertTrue(cityStateZipDetailsShipping.getText().contains(getUserData().getCity()));
+        assertTrue(cityStateZipDetailsShipping.getText().contains(getUserData().getPostCode()));
+        assertTrue(countryDetailsShipping.getText().contains(getUserData().getCountry()));
+//        String groundLabelFromArray = arrayCheckout.get(0);
+//        String groundLabel[] = groundLabelFromArray.split(" ");
+//        assertTrue(methodDetailsShipping.getText().contains(groundLabel[0]));
+        return this;
+    }
+
 
     @Step
     public CheckoutPage validateProductDetails(){
@@ -135,5 +242,13 @@ public class CheckoutPage extends ProductAbstract{
 
         return this;
     }
+
+    @Step("Click Order details and validate order")
+    public CheckoutPage confirm() {
+        clickConfirmOrder.click();
+        orderDetails.click();
+        return this;
+    }
+
 
 }

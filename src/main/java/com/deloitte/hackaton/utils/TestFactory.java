@@ -24,8 +24,8 @@ public class TestFactory {
         return new MainPage(driver, userData);
     }
 
-    public static GiftCards giftCards(WebDriver driver, JSONUserData userData) {
-        return new GiftCards(driver, userData);
+    public static GiftCardsPage giftCards(WebDriver driver, JSONUserData userData) {
+        return new GiftCardsPage(driver, userData);
     }
 
     public static ContactUsNonLoginUserPage startNewContactUsFormNonLoginTest(WebDriver driver, JSONUserData userData){
@@ -35,12 +35,8 @@ public class TestFactory {
         return new ContactUsLoginUserPage(driver, userData);
     }
 
-    public static Cart cart(WebDriver driver, JSONUserData userData) {
-        return new Cart(driver, userData);
-    }
-
-    public static BlueAndGreenSneaker blueAndGreenSneaker(WebDriver driver, JSONUserData userData) {
-        return new BlueAndGreenSneaker(driver, userData);
+    public static SneakersProductPage blueAndGreenSneaker(WebDriver driver, JSONUserData userData) {
+        return new SneakersProductPage(driver, userData);
     }
 
     public static CustomerInfoPage startNewCustomerInfoTest(WebDriver driver, JSONUserData userData) {
@@ -48,16 +44,8 @@ public class TestFactory {
 
     }
 
-    public static Checkout checkout(WebDriver driver, JSONUserData userData) {
-        return new Checkout(driver, userData);
-    }
-
-
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new ProductPage(driver, productData, userData);
     }
-
-
-
 }
 

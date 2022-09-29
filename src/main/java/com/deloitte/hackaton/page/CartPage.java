@@ -43,11 +43,14 @@ public class CartPage extends ProductAbstract{
     WebElement checkoutButton;
 
 
-    JSONUserData userData;
 
     public CartPage(WebDriver driver, JSONProductData productData, JSONUserData userData) {
         super(driver, productData);
         this.userData = userData;
+    }
+
+    public CartPage(WebDriver driver,JSONUserData userData) {
+        super(driver, userData);
     }
 
     @Step("Assert if ordered product is correct")
@@ -71,6 +74,13 @@ public class CartPage extends ProductAbstract{
         assertEquals("United States", text);
         WebElement unitedStates = driver.findElement(By.xpath("//*[@id=\"CountryId\"]//option[@value=\"1\"]"));
         assertTrue(unitedStates.isSelected());
+        return this;
+    }
+
+    @Step ("Select users country")
+    public CartPage selectUsersCountry(){
+        Select countryDropDownSelect = new Select(countryDropDown);
+        countryDropDownSelect.selectByVisibleText(userData.getCountry());
         return this;
     }
 

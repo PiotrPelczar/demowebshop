@@ -41,22 +41,25 @@ public class MainPage extends UserAbstract {
     @FindBy (xpath = "//a[@href=\"/apparel-shoes\"]")
     WebElement apparelShoes;
 
+    @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
+    WebElement goToCartButton;
+
 
     public MainPage navigateToMainPage() {
         driver.get("https://demowebshop.tricentis.com/");
         return this;
     }
 
-    public MainPage goToGiftCards() {
+    public GiftCardsPage goToGiftCards() {
         giftCards.click();
-        return this;
+        return new GiftCardsPage(driver, userData);
     }
 
-    public MainPage searchForBlueAndGreenSneaker() {
+    public SneakersProductPage searchForBlueAndGreenSneaker() {
         searchField.sendKeys("blue and green sneaker");
         searchField.sendKeys(Keys.RETURN);
         blueAndGreenSneaker.click();
-        return this;
+        return new SneakersProductPage(driver, userData);
     }
 
     @Step ()
@@ -67,16 +70,14 @@ public class MainPage extends UserAbstract {
         return this;
     }
 
-    public MainPage laptop14inchAddToCart() {
+    public CartPage laptop14inchAddToCart() throws InterruptedException {
         laptop14inchAddToCart.click();
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addToCartConfirmation));
-        return this;
+        goToCartButton.click();
+        Thread.sleep(500L);
+        return new CartPage(this.driver, this.userData);
+    }
 
-    }
-    public MainPage apparelShoes(){
-        apparelShoes.click();
-        return this;
-    }
 }
 
 

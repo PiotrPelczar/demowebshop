@@ -50,6 +50,7 @@ public class ProductPage extends ProductAbstract{
 
     @Step("Open product page")
     public ProductPage openProductPage() throws InterruptedException {
+        Thread.sleep(1000);
         this.driver.get("https://demowebshop.tricentis.com/"+ getProductData().getUrl());
         return this;
     }

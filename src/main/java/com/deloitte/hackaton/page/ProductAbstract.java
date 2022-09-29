@@ -33,4 +33,11 @@ public abstract class ProductAbstract {
         }
         return this.productData;
     }
+
+    protected JSONUserData getUserData() {
+        if (Objects.isNull(this.userData)) {
+            throw new IllegalArgumentException("User data must not be null!");
+        }
+        return this.userData;
+    }
 }

@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import static com.deloitte.hackaton.utils.TestFactory.startNewCustomerInfoTest;
 import static com.deloitte.hackaton.utils.TestFactory.startNewLoginTest;
 
-public class AddAndEditUserInfoTestSuite {
+public class EditUserInfoTestSuite {
 
     WebDriver driver;
 

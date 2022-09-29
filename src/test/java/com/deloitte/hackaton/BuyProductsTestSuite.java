@@ -2,12 +2,9 @@ package com.deloitte.hackaton;
 
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.user.JSONUserData;
-import com.deloitte.hackaton.page.Checkout;
-import com.deloitte.hackaton.utils.TestFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +15,7 @@ import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
-public class BuyProducts {
+public class BuyProductsTestSuite {
 
     WebDriver driver;
 
@@ -29,7 +26,7 @@ public class BuyProducts {
     }
 
     @BeforeEach
-    public void beforeeach() {
+    void setup() {
         this.driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -39,7 +36,7 @@ public class BuyProducts {
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void buyAPhysicalGiftCard(JSONUserData userData) {
+    void buyAPhysicalGiftCard(JSONUserData userData) throws InterruptedException {
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
@@ -49,7 +46,7 @@ public class BuyProducts {
         startNewCustomerInfoTest(driver, userData).openAddressPage();
         boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
         System.out.println(isTrue);
-        if (!isTrue == true) {
+        if (!isTrue) {
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()
@@ -64,25 +61,16 @@ public class BuyProducts {
         }
         mainPage(driver, userData)
                 .navigateToMainPage()
-                .goToGiftCards();
-        giftCards(driver, userData)
+                .goToGiftCards()
                 .locatePhisicalGiftCard100$()
-                .provideInfoAndAddToCart();
-        cart(driver, userData)
-                .goToCart()
-                .selectCountryFromDropdown()
-                .clickTerms()
-                .clickCheckout();
-        checkout(driver, userData)
+                .provideInfoAndAddToCart()
+                .selectUsersCountry()
+                .acceptTerms()
+                .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
                 .validateBillingInfo()
                 .validateShippingInfo();
-
-
-
-
-
     }
 
 
@@ -91,7 +79,7 @@ public class BuyProducts {
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void buyACustomizableProduct(JSONUserData userData) {
+    void buyACustomizableProduct(JSONUserData userData) throws InterruptedException {
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
@@ -116,29 +104,22 @@ public class BuyProducts {
         }
         mainPage(driver, userData)
                 .navigateToMainPage()
-                .searchForBlueAndGreenSneaker();
-        blueAndGreenSneaker(driver, userData)
-                .selecColor()
+                .searchForBlueAndGreenSneaker()
+                .selectColor()
                 .selectSize()
-                .addToCart();
-        cart(driver, userData)
-                .goToCart()
-                .clickTerms()
-                .clickCheckout();
-        checkout(driver, userData)
+                .addToCart()
+                .acceptTerms()
+                .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
                 .validateBillingInfo()
                 .validateShippingInfo();
-        //        .validateProductInfoBGSneaker();
-
-
     }
 
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void buyANonCustomizableProduct(JSONUserData userData) {
+    void buyANonCustomizableProduct(JSONUserData userData) throws InterruptedException {
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
@@ -164,12 +145,9 @@ public class BuyProducts {
         mainPage(driver, userData)
                 .navigateToMainPage()
                 .searchFor14laptop()
-                .laptop14inchAddToCart();
-        cart(driver, userData)
-                .goToCart()
-                .clickTerms()
-                .clickCheckout();
-        checkout(driver, userData)
+                .laptop14inchAddToCart()
+                .acceptTerms()
+                .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
                 .validateBillingInfo()

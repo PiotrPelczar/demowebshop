@@ -6,12 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class GiftCards extends UserAbstract {
+public class GiftCardsPage extends UserAbstract {
 
-
-    WebDriver driver;
-
-    public GiftCards(WebDriver driver, JSONUserData userData){
+    public GiftCardsPage(WebDriver driver, JSONUserData userData){
         super(driver, userData);
     }
 
@@ -37,23 +34,26 @@ public class GiftCards extends UserAbstract {
     @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[3]/div[4]/div/div[1]/a/img")
     WebElement physicalGiftCard100$;
 
+    @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
+    WebElement goToCartButton;
+
 
 
 
     @Step ("locate Physical Gift Card and go to product details")
-    public GiftCards locatePhisicalGiftCard100$(){
+    public GiftCardsPage locatePhisicalGiftCard100$(){
         physicalGiftCard100$.click();
         return this;
     }
     @Step("Provide recipient info & write a message and add to cart")
-    public GiftCards provideInfoAndAddToCart() {
+    public CartPage provideInfoAndAddToCart() throws InterruptedException {
         recipientsName.sendKeys("Flip");
         yourName.sendKeys("Flap");
         giftCardMessage.sendKeys("This is the message");
         addToCart.click();
         addToCartConfirmation.click();
-        return this;
+        goToCartButton.click();
+        Thread.sleep(500L);
+        return new CartPage(this.driver, this.userData);
     }
-
-
 }
