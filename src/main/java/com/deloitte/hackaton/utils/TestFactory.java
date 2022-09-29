@@ -7,17 +7,28 @@ import com.deloitte.hackaton.page.*;
 import com.deloitte.hackaton.page.CustomerInfoPage;
 import com.deloitte.hackaton.page.LoginPage;
 import com.deloitte.hackaton.page.RegisterPage;
+
 import org.openqa.selenium.WebDriver;
 
 public class TestFactory {
 
-    public static RegisterPage startNewUserTest(WebDriver driver, JSONUserData userData){
+    public static RegisterPage startNewUserTest(WebDriver driver, JSONUserData userData) {
         return new RegisterPage(driver, userData);
     }
 
-    public static LoginPage startNewLoginTest(WebDriver driver, JSONUserData userData){
+    public static LoginPage startNewLoginTest(WebDriver driver, JSONUserData userData) {
         return new LoginPage(driver, userData);
     }
+
+    public static MainPage mainPage(WebDriver driver, JSONUserData userData) {
+        return new MainPage(driver, userData);
+    }
+
+    public static GiftCards giftCards(WebDriver driver, JSONUserData userData) {
+        return new GiftCards(driver, userData);
+    }
+
+
 
     public static ContactUsNonLoginUserPage startNewContactUsFormNonLoginTest(WebDriver driver, JSONUserData userData){
         return new ContactUsNonLoginUserPage(driver, userData);
@@ -27,9 +38,23 @@ public class TestFactory {
     }
 
     public static CustomerInfoPage startNewCustomerInfoTest(WebDriver driver, JSONUserData userData){
-        return new CustomerInfoPage(driver, userData);
+    public static Cart cart(WebDriver driver, JSONUserData userData) {
+        return new Cart(driver, userData);
     }
 
+    public static BlueAndGreenSneaker blueAndGreenSneaker(WebDriver driver, JSONUserData userData) {
+        return new BlueAndGreenSneaker(driver, userData);
+    }
+
+    public static CustomerInfoPage startNewCustomerInfoTest(WebDriver driver, JSONUserData userData) {
+        return new CustomerInfoPage(driver, userData);
+
+    }
+
+    public static Checkout checkout(WebDriver driver, JSONUserData userData) {
+        return new Checkout(driver, userData);
+
+    }
 
 
 }
