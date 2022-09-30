@@ -11,29 +11,17 @@ import org.openqa.selenium.WebDriver;
 
 
 public class TestFactory {
-
     public static RegisterPage startNewUserTest(WebDriver driver, JSONUserData userData) {
         return new RegisterPage(driver, userData);
     }
-
     public static LoginPage startNewLoginTest(WebDriver driver, JSONUserData userData) {
         return new LoginPage(driver, userData);
     }
-
     public static NewsletterPage startNewNewsletterNegativeTest(WebDriver driver, JSONInvalidEmails mailData){
         return new NewsletterPage(driver, mailData);
     }
-
-    public static UserDataRandomizer startRandomizer(){
-        return new UserDataRandomizer();
-    }
-
     public static MainPage mainPage(WebDriver driver, JSONUserData userData) {
         return new MainPage(driver, userData);
-    }
-
-    public static GiftCardsPage giftCards(WebDriver driver, JSONUserData userData) {
-        return new GiftCardsPage(driver, userData);
     }
 
     public static ContactUsNonLoginUserPage startNewContactUsFormNonLoginTest(WebDriver driver, JSONUserData userData){
@@ -42,20 +30,11 @@ public class TestFactory {
     public static ContactUsLoginUserPage startNewContactUsFormLoginTest(WebDriver driver, JSONUserData userData){
         return new ContactUsLoginUserPage(driver, userData);
     }
-
-    public static SneakersProductPage blueAndGreenSneaker(WebDriver driver, JSONUserData userData) {
-        return new SneakersProductPage(driver, userData);
-
-    }
-
     public static CustomerInfoPage startNewCustomerInfoTest(WebDriver driver, JSONUserData userData) {
         return new CustomerInfoPage(driver, userData);
-
     }
-
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new ProductPage(driver, productData, userData);
     }
-
 }
 

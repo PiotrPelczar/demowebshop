@@ -12,15 +12,15 @@ import java.util.List;
 
 public class SneakersProductPage extends UserAbstract {
 
-    private List<String> array123;
+    public static List<String> listOfElements;
     public SneakersProductPage(WebDriver driver, JSONUserData userData){
         super(driver, userData);
-        array123 = new ArrayList<>();
-
+        listOfElements = new ArrayList<>();
     }
 
-    public List<String> getList(){
-        return array123;}
+    public static List<String> getList(){
+        return listOfElements;
+    }
 
 
     @FindBy(id = "product_attribute_28_7_10")
@@ -36,23 +36,30 @@ public class SneakersProductPage extends UserAbstract {
     WebElement addToCartConfirmation;
 
     @FindBy (xpath = "//option[@value=\"28\"]")
-    WebElement size11;
+    WebElement size;
 
     @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
     WebElement goToCartButton;
+
+    @FindBy(xpath = "//*[@id=\"color-squares-11\"]//span[@title=\"Green\"]")
+    WebElement greenColor;
+
+    @FindBy(xpath = "//div[@class=\"product-name\"]//h1")
+    WebElement shoeName;
 
     @Step("Product is customized and added to cart")
     public SneakersProductPage selectSize() {
         Select sizeofSneakers = new Select(sizeDropdown);
         sizeofSneakers.selectByVisibleText("11");
-        array123.add(size11.getAttribute("value"));
-      //  checkout.getList().add(size11.getAttribute("value"));
+        listOfElements.add(size.getText());
         return this;
     }
 
     @Step("Product is customized and added to cart")
     public SneakersProductPage selectColor() {
         colorGreen.click();
+        listOfElements.add(greenColor.getAttribute("title"));
+        listOfElements.add(shoeName.getText());
         return this;
     }
 
@@ -64,6 +71,4 @@ public class SneakersProductPage extends UserAbstract {
         Thread.sleep(500L);
         return new CartPage(this.driver, this.userData);
     }
-
-
 }

@@ -1,17 +1,11 @@
-
-{
-  "users" : [
-    {
-  "firstName": "Florencio",
-  "lastName": "Gearwar",
-  "email": "nutscarmelina@gmx.com",
-  "password": "th\u003ceOrem2",
-  "country": "Honduras",
-  "city": "San Marino",
-  "address_1": "Havana",
-  "postCode": "50-469",
-  "phoneNumber": "064732473"
-    }
-  ]
-}
-
+{"users" : [{
+  "firstName": "Tyree",
+  "lastName": "Owca",
+  "email": "dolefulcoron@gmx.com",
+  "password": "hedonisT.s",
+  "country": "Belarus",
+  "city": "Lome",
+  "address_1": "Naypyidaw",
+  "postCode": "52-254",
+  "phoneNumber": "817706916"
+}]}

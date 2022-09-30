@@ -10,18 +10,6 @@
       "address_1": "address",
       "postCode": "00-000",
       "phoneNumber": 123123123
-    },
-    {
-      "firstName": "adamTest123",
-      "lastName": "testLastName",
-      "email": "adamtest123@email.com",
-      "password": "password123",
-      "country" : "Poland",
-      "city" : "Warsaw",
-      "address_1": "address",
-      "postCode": "00-000",
-      "phoneNumber": 123123123
-
     }
   ]
 }

@@ -11,8 +11,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class CheckoutPage extends ProductAbstract{
 
@@ -127,7 +130,16 @@ public class CheckoutPage extends ProductAbstract{
     @FindBy (xpath = "//ul[@class=\"shipping-info\"]/li[@class=\"shipping-method\"]")
     WebElement methodDetailsShipping;
 
+    @FindBy(xpath = "//div[@class=\"attributes\"][contains(text(), \"Size\")]")
+    WebElement sizeColorField;
 
+    @FindBy(xpath = "//em//a")
+    WebElement shoeNameField;
+
+
+
+
+    public List<String> elements = SneakersProductPage.getList();
 
     public CheckoutPage(WebDriver driver, JSONProductData productData, JSONUserData userData) {
         super(driver, productData);
@@ -231,6 +243,14 @@ public class CheckoutPage extends ProductAbstract{
         return this;
     }
 
+    @Step
+    public CheckoutPage validateShoesDetails(){
+        assertTrue(sizeColorField.getText().contains(elements.get(0)));
+        assertTrue(sizeColorField.getText().contains(elements.get(2)));
+        assertEquals(shoeNameField.getText(), elements.get(1));
+        return this;
+    }
+
 
     @Step
     public CheckoutPage validateProductDetails(){
@@ -249,6 +269,4 @@ public class CheckoutPage extends ProductAbstract{
         orderDetails.click();
         return this;
     }
-
-
 }

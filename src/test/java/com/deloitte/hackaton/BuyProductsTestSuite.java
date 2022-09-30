@@ -73,10 +73,6 @@ public class BuyProductsTestSuite {
                 .validateShippingInfo();
     }
 
-
-
-
-
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void buyACustomizableProduct(JSONUserData userData) throws InterruptedException {
@@ -112,6 +108,7 @@ public class BuyProductsTestSuite {
                 .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
+                .validateShoesDetails()
                 .validateBillingInfo()
                 .validateShippingInfo();
     }
