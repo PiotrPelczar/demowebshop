@@ -5,7 +5,8 @@
       "name": "Blue Jeans",
       "url": "blue-jeans",
       "quantity": 12,
-      "available": true
+      "available": true,
+      "id" : 36
     }
   ]
 }

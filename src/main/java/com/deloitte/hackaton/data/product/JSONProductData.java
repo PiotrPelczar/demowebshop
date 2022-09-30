@@ -22,6 +22,9 @@ public class JSONProductData {
     @JsonProperty("available")
     private Boolean available;
 
+    @JsonProperty("id")
+    private Integer id;
+
     @Override
     public String toString() {
         return "Product " + this.name;

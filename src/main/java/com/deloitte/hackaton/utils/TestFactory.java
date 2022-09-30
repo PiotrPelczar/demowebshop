@@ -39,27 +39,24 @@ public class TestFactory {
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new ProductPage(driver, productData, userData);
     }
-
+    public static RateReviewPage startNewReviewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
+        return  new RateReviewPage(driver,productData,userData);
+    }
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData){
         return new ProductPage(driver, productData);
     }
-
     public static CartPage startNewCartTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new CartPage(driver, productData, userData);
     }
-
     public static CartPage startNewCartTest(WebDriver driver, JSONUserData userData){
         return new CartPage(driver, userData);
     }
-
     public static CartPage startNewCartTest(WebDriver driver, JSONProductData productData){
         return new CartPage(driver, productData);
     }
-
     public static JeweleryPage startNewJeweleryTest(WebDriver driver){
         return new JeweleryPage(driver);
     }
-
 
 }
 

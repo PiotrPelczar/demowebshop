@@ -37,6 +37,10 @@ public class ProductPage extends ProductAbstract{
     @FindBy(xpath = "//span[@class='cart-label']")
     WebElement cartLink;
 
+
+    @FindBy(xpath = "//*[@id=\"product-details-form\"]//a[contains(text(), 'review(s)')]")
+    WebElement review;
+
     @FindBy(xpath = "//div[@data-productid=\"14\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
     WebElement blackWhiteDiamond;
 
@@ -129,6 +133,14 @@ public class ProductPage extends ProductAbstract{
         cartLink.click();
         Thread.sleep(500L);
         return new CartPage(this.driver, this.productData, this.userData);
+    }
+
+    @Step("Click on review link")
+    public ProductPage goToReviewPage(){
+        review.click();
+        assertEquals("https://demowebshop.tricentis.com/productreviews/" + getProductData().getId() , driver.getCurrentUrl());
+        return this;
+
     }
 
 
