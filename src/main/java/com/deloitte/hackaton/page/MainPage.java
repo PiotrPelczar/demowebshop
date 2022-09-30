@@ -1,5 +1,6 @@
 package com.deloitte.hackaton.page;
 
+import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
@@ -15,9 +16,15 @@ import java.time.Duration;
 
 public class MainPage extends UserAbstract {
 
+    JSONProductData productData;
 
-    public MainPage (WebDriver driver, JSONUserData userData){
+    public MainPage(WebDriver driver, JSONUserData userData){
         super(driver, userData);
+    }
+
+    public MainPage(WebDriver driver, JSONProductData productData, JSONUserData userData){
+        super(driver, userData);
+        this.productData = productData;
     }
 
     @FindBy(xpath = "//a[@href=\"/gift-cards\"]")
@@ -75,7 +82,7 @@ public class MainPage extends UserAbstract {
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addToCartConfirmation));
         goToCartButton.click();
         Thread.sleep(500L);
-        return new CartPage(this.driver, this.userData);
+        return new CartPage(this.driver, this.productData, this.userData);
     }
 
 }

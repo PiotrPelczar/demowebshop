@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -68,7 +69,7 @@ public class CheckoutPage extends ProductAbstract{
     @FindBy(xpath = "//td[@class=\"product\"]//a")
     WebElement productName;
 
-    @FindBy(xpath = "//td[@class=\"qty nobr\"]/span[not(@class)]")
+    @FindBy(xpath = "//td[@class=\"a-center quantity\"]//span")
     WebElement quantity;
 
     @FindBy(xpath = "//input[@onclick=\"Billing.save()\"]")
@@ -134,12 +135,29 @@ public class CheckoutPage extends ProductAbstract{
     WebElement sizeColorField;
 
     @FindBy(xpath = "//em//a")
-    WebElement shoeNameField;
+    WebElement productNameField;
 
+    @FindBy (xpath = "//label[@for=\"shippingoption_0\"]")
+    WebElement shippingGroundLabel;
+    @FindBy (xpath = "//div[@class=\"payment-details\"]/label[@for=\"paymentmethod_0\"]")
+    WebElement paymentMethodCODLabel;
 
+    @FindBy(xpath = "//*[@id=\"BillingNewAddress_FirstName\"]")
+    WebElement billingFirstName;
 
+    @FindBy(xpath = "//*[@id=\"BillingNewAddress_LastName\"]")
+    WebElement billingLastName;
 
-    public List<String> elements = SneakersProductPage.getList();
+    @FindBy(xpath = "//*[@id=\"BillingNewAddress_Email\"]")
+    WebElement email;
+
+    public List<String> sneakersElements = SneakersProductPage.getList();
+
+    public List<String> productDataElements = CartPage.getList();
+
+    List<String> checkoutInfoList = new ArrayList<>();
+
+    List<String> billingDataList = new ArrayList<>();
 
     public CheckoutPage(WebDriver driver, JSONProductData productData, JSONUserData userData) {
         super(driver, productData);
@@ -151,10 +169,10 @@ public class CheckoutPage extends ProductAbstract{
         clickBillingAddress.click();
         clickShippingAddress.click();
         groundShippingMethod.click();
-//        arrayCheckout.add(shippingGroundLabel.getText());
+        checkoutInfoList.add(shippingGroundLabel.getText());
         clickShippingMethod.click();
         paymentMethodCOD.click();
-//        arrayCheckout.add(paymentMethodCODLabel.getText());
+        checkoutInfoList.add(paymentMethodCODLabel.getText());
         clickPaymentMethod.click();
         clickPaymentInfo.click();
         return this;
@@ -176,6 +194,13 @@ public class CheckoutPage extends ProductAbstract{
         address_1.sendKeys("address1");
         postCode.sendKeys("93-120");
         phoneNumber.sendKeys("123321123");
+//        billingDataList.add(billingFirstName.getText());
+//        billingDataList.add(billingLastName.getText());
+//        billingDataList.add(email.getText());
+        billingDataList.add(city.getText());
+        billingDataList.add(address_1.getText());
+        billingDataList.add(postCode.getText());
+        billingDataList.add(phoneNumber.getText());
         Thread.sleep(1000);
         billingContinueButton.click();
         return this;
@@ -192,6 +217,7 @@ public class CheckoutPage extends ProductAbstract{
     @Step
     public CheckoutPage selectShippingMethod() throws InterruptedException {
         groundShippingMethod.click();
+        checkoutInfoList.add(groundShippingMethod.getText());
         Thread.sleep(1000);
         shippingMethodContinueButton.click();
         return this;
@@ -199,7 +225,9 @@ public class CheckoutPage extends ProductAbstract{
 
     @Step
     public CheckoutPage selectPaymentMethod() throws InterruptedException {
+        Thread.sleep(1000);
         paymentMethod.click();
+        checkoutInfoList.add(paymentMethod.getText());
         Thread.sleep(1000);
         paymentMethodContinueButton.click();
         return this;
@@ -222,9 +250,20 @@ public class CheckoutPage extends ProductAbstract{
         assertTrue(cityStateZipDetailsBilling.getText().contains(getUserData().getCity()));
         assertTrue(cityStateZipDetailsBilling.getText().contains(getUserData().getPostCode()));
         assertTrue(countryDetailsBilling.getText().contains(getUserData().getCountry()));
-//        String paymentCODFromArray = arrayCheckout.get(1);
-//        String paymentCOD[] = paymentCODFromArray.split(" ");
-//        assertTrue(paymentDetailsBilling.getText().contains(paymentCOD[0]));
+        String paymentCODFromArray = checkoutInfoList.get(1);
+        String paymentCOD[] = paymentCODFromArray.split(" ");
+        assertTrue(paymentDetailsBilling.getText().contains(paymentCOD[0]));
+        return this;
+    }
+
+    @Step("Validate billing details when changed")
+    public CheckoutPage validateBillingInfoOnChange(){
+        assertTrue(nameDetailsBilling.getText().contains(getUserData().getFirstName()));
+        assertTrue(nameDetailsBilling.getText().contains(getUserData().getLastName()));
+        assertTrue(emailDetailsBilling.getText().contains(getUserData().getEmail()));
+        assertTrue(cityStateZipDetailsBilling.getText().contains(billingDataList.get(0)));
+        assertTrue(cityStateZipDetailsBilling.getText().contains(billingDataList.get(1)));
+        assertTrue(cityStateZipDetailsBilling.getText().contains(billingDataList.get(2)));
         return this;
     }
 
@@ -237,29 +276,28 @@ public class CheckoutPage extends ProductAbstract{
         assertTrue(cityStateZipDetailsShipping.getText().contains(getUserData().getCity()));
         assertTrue(cityStateZipDetailsShipping.getText().contains(getUserData().getPostCode()));
         assertTrue(countryDetailsShipping.getText().contains(getUserData().getCountry()));
-//        String groundLabelFromArray = arrayCheckout.get(0);
-//        String groundLabel[] = groundLabelFromArray.split(" ");
-//        assertTrue(methodDetailsShipping.getText().contains(groundLabel[0]));
+        String groundLabelFromArray = checkoutInfoList.get(0);
+        String groundLabel[] = groundLabelFromArray.split(" ");
+        assertTrue(methodDetailsShipping.getText().contains(groundLabel[0]));
         return this;
     }
 
     @Step
     public CheckoutPage validateShoesDetails(){
-        assertTrue(sizeColorField.getText().contains(elements.get(0)));
-        assertTrue(sizeColorField.getText().contains(elements.get(2)));
-        assertEquals(shoeNameField.getText(), elements.get(1));
+        assertTrue(sizeColorField.getText().contains(sneakersElements.get(0)));
+        assertTrue(sizeColorField.getText().contains(sneakersElements.get(2)));
+        assertEquals(productNameField.getText(), sneakersElements.get(1));
         return this;
     }
 
 
     @Step
     public CheckoutPage validateProductDetails(){
-        var productNameText = productName.getText();
-        assertTrue(productNameText.contains(productData.getName()));
-
+        var productNameText = productNameField.getText();
+        assertTrue(productNameText.contains(productDataElements.get(0)));
         var productQuantity = quantity.getText();
-        assertEquals(productData.getQuantity().toString(), productQuantity);
-
+        assertEquals(productNameText, productDataElements.get(0));
+        assertEquals(productQuantity, productDataElements.get(1));
         return this;
     }
 

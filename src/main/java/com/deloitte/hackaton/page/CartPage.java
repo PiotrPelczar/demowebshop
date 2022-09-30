@@ -5,30 +5,25 @@ import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
 import lombok.var;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CartPage extends ProductAbstract{
 
-    @FindBy(xpath = "//input[@name='removefromcart']")
-    WebElement deleteCheckbox;
-
     @FindBy(xpath = "//input[@class='qty-input']")
     WebElement quantity;
 
     @FindBy(xpath = "//a[@class='product-name']")
     WebElement itemName;
-
-    @FindBy(xpath = "//input[@name='updatecart']")
-    WebElement updateCart;
-
-    @FindBy(xpath = "//div[@class='order-summary-content']")
-    WebElement orderSummary;
 
     @FindBy(xpath = "//*[@id=\"CountryId\"]")
     WebElement countryDropDown;
@@ -42,21 +37,79 @@ public class CartPage extends ProductAbstract{
     @FindBy(xpath = "//*[@id=\"checkout\"]")
     WebElement checkoutButton;
 
+    @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
+    WebElement cartButton;
+
+    @FindBy(xpath = "//tr[@class=\"cart-item-row\"][2]//input[@name=\"removefromcart\"]")
+    WebElement deleteItemCheckbox;
+
+    @FindBy(xpath = "//input[@name='updatecart']")
+    WebElement updateCart;
+
+
+    public static List<String> productDataElements;
 
 
     public CartPage(WebDriver driver, JSONProductData productData, JSONUserData userData) {
         super(driver, productData);
         this.userData = userData;
+        productDataElements = new ArrayList<>();
     }
 
     public CartPage(WebDriver driver,JSONUserData userData) {
         super(driver, userData);
+        productDataElements = new ArrayList<>();
+    }
+
+    public static List<String> getList(){
+        return productDataElements;
+    }
+
+
+    @Step("Delete product if cart not empty")
+    public boolean checkIfCartEmpty(){
+        cartButton.click();
+        try{
+            boolean doesExist =  driver.findElements(By.xpath("//div[@class=\"order-summary-content\"][contains(text(), \"Your Shopping Cart is empty!\")]")).isEmpty();
+            return doesExist;
+        }catch (NoSuchElementException e) {
+            System.out.println("Such element doesn't exist");
+            return false;
+        }
+    }
+
+    public CartPage deleteIfNotEmpty() {
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("//input[@name='removefromcart']"));
+        for(WebElement checkbox : checkBoxes){
+            checkbox.click();
+        }
+        updateCart.click();
+        return this;
+    }
+
+    @Step("Go to cart page")
+    public CartPage goToCart(){
+        cartButton.click();
+        return this;
+    }
+
+    @Step("Delete product from shipping cart")
+    public CartPage deleteProduct(){
+        deleteItemCheckbox.click();
+        return this;
+    }
+
+    @Step("Update cart")
+    public CartPage updateCart(){
+        updateCart.click();
+        return this;
     }
 
     @Step("Assert if ordered product is correct")
     public CartPage verifyProductName() {
         var txt = itemName.getText();
         assertTrue(txt.contains(productData.getName()));
+        productDataElements.add(itemName.getText());
         return this;
     }
 
@@ -64,6 +117,14 @@ public class CartPage extends ProductAbstract{
     public CartPage verifyQuantity() {
         var txt = quantity.getAttribute("value");
         assertEquals(productData.getQuantity().toString(), txt);
+        productDataElements.add(quantity.getText());
+        return this;
+    }
+
+    @Step("Verify product data")
+    public CartPage saveProductData(){
+        productDataElements.add(itemName.getText());
+        productDataElements.add(quantity.getText());
         return this;
     }
     @Step("Select country from dropdown")

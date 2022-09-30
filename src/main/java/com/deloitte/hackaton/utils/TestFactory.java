@@ -36,5 +36,13 @@ public class TestFactory {
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new ProductPage(driver, productData, userData);
     }
+
+    public static CartPage startNewCartTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
+        return new CartPage(driver, productData, userData);
+    }
+
+    public static CartPage startNewCartTest(WebDriver driver, JSONUserData userData){
+        return new CartPage(driver, userData);
+    }
 }
 

@@ -42,10 +42,15 @@ public class ProductPage extends ProductAbstract{
         this.userData = userData;
     }
 
-
     @Step
     public LoginPage login(){
         return new LoginPage(this.driver, this.userData);
+    }
+
+    @Step
+    public MainPage goBackToMainPage(){
+        driver.get("https://demowebshop.tricentis.com/");
+        return new MainPage(this.driver, this.productData, this.userData);
     }
 
     @Step("Open product page")

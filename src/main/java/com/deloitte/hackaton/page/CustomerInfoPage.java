@@ -2,12 +2,11 @@ package com.deloitte.hackaton.page;
 
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,6 +66,7 @@ public class CustomerInfoPage extends UserAbstract{
 
     @Step("Open customer address page")
     public CustomerInfoPage openAddressPage(){
+        driver.get("https://demowebshop.tricentis.com/customer/info");
         addressesTab.click();
         return this;
     }
@@ -139,7 +139,7 @@ public class CustomerInfoPage extends UserAbstract{
     }
 
     @Step("Delete address")
-    public CustomerInfoPage deleteAddress(){
+    public CustomerInfoPage deleteAddress() throws InterruptedException {
         try{
             WebElement deleteButton = driver.findElement(By.xpath("//input[@value=\"Delete\"]"));
             deleteButton.click();

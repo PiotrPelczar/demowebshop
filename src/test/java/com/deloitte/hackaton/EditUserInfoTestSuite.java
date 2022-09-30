@@ -31,8 +31,8 @@ public class EditUserInfoTestSuite {
     void setup(){
         this.driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(8));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(8));
     }
 
     @AfterEach
@@ -42,7 +42,7 @@ public class EditUserInfoTestSuite {
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void addAndDeleteUserData(JSONUserData userData){
+    void addAndDeleteUserData(JSONUserData userData) throws InterruptedException {
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
