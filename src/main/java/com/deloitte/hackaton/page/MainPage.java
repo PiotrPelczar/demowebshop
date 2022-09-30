@@ -1,6 +1,5 @@
 package com.deloitte.hackaton.page;
 
-import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
@@ -13,19 +12,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.annotation.security.RunAs;
 import java.time.Duration;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainPage extends UserAbstract {
 
-    JSONProductData productData;
 
-    public MainPage(WebDriver driver, JSONUserData userData){
+    public MainPage(WebDriver driver, JSONUserData userData) {
         super(driver, userData);
     }
 
-    public MainPage(WebDriver driver, JSONProductData productData, JSONUserData userData){
-        super(driver, userData);
-        this.productData = productData;
-    }
 
     @FindBy(xpath = "//a[@href=\"/gift-cards\"]")
     WebElement giftCards;
@@ -33,19 +31,19 @@ public class MainPage extends UserAbstract {
     @FindBy(id = "small-searchterms")
     WebElement searchField;
 
-    @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[1]/a/img")
+    @FindBy(xpath = "//div[@data-productid=\"28\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
     WebElement blueAndGreenSneaker;
 
-    @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[2]/h2/a")
+    @FindBy(xpath = "//div[@data-productid=\"31\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
     WebElement laptop14inch;
 
     @FindBy(id = "add-to-cart-button-31")
     WebElement laptop14inchAddToCart;
 
-    @FindBy (xpath = "//p[@class=\"content\"]")
+    @FindBy(xpath = "//p[@class=\"content\"]")
     WebElement addToCartConfirmation;
 
-    @FindBy (xpath = "//a[@href=\"/apparel-shoes\"]")
+    @FindBy(xpath = "//a[@href=\"/apparel-shoes\"]")
     WebElement apparelShoes;
 
     @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
@@ -69,7 +67,7 @@ public class MainPage extends UserAbstract {
         return new SneakersProductPage(driver, userData);
     }
 
-    @Step ()
+    @Step()
     public MainPage searchFor14laptop() {
         searchField.sendKeys("14.1-inch Laptop");
         searchField.sendKeys(Keys.RETURN);
@@ -82,10 +80,11 @@ public class MainPage extends UserAbstract {
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addToCartConfirmation));
         goToCartButton.click();
         Thread.sleep(500L);
-        return new CartPage(this.driver, this.productData, this.userData);
+        return new CartPage(this.driver, this.userData);
     }
-
 }
+
+
 
 
 

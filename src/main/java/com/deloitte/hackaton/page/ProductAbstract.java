@@ -26,7 +26,14 @@ public abstract class ProductAbstract {
         this.userData = userData;
         PageFactory.initElements(driver, this);
     }
-    
+
+    public ProductAbstract(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+
+
     protected JSONProductData getProductData() {
         if (Objects.isNull(this.productData)) {
             throw new IllegalArgumentException("Product data must not be null!");

@@ -3,7 +3,6 @@ import com.deloitte.hackaton.data.user.JSONInvalidEmails;
 import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import com.deloitte.hackaton.page.*;
-import com.deloitte.hackaton.data.user.UserDataRandomizer;
 import com.deloitte.hackaton.page.CustomerInfoPage;
 import com.deloitte.hackaton.page.LoginPage;
 import com.deloitte.hackaton.page.RegisterPage;
@@ -24,6 +23,7 @@ public class TestFactory {
         return new MainPage(driver, userData);
     }
 
+
     public static ContactUsNonLoginUserPage startNewContactUsFormNonLoginTest(WebDriver driver, JSONUserData userData){
         return new ContactUsNonLoginUserPage(driver, userData);
     }
@@ -34,15 +34,21 @@ public class TestFactory {
         return new CustomerInfoPage(driver, userData);
     }
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
-        return new ProductPage(driver, productData, userData);
+        return new ProductPage(driver);
     }
 
-    public static CartPage startNewCartTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
-        return new CartPage(driver, productData, userData);
+    public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData){
+        return new ProductPage(driver, productData);
     }
 
-    public static CartPage startNewCartTest(WebDriver driver, JSONUserData userData){
-        return new CartPage(driver, userData);
+    public static ProductPage startNewProductTest(WebDriver driver){
+        return new ProductPage(driver);
     }
+
+    public static JeweleryPage startNewJeweleryTest(WebDriver driver){
+        return new JeweleryPage(driver);
+    }
+
+
 }
 

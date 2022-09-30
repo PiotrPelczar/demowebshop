@@ -4,7 +4,29 @@
       "name": "Blue Jeans",
       "url": "blue-jeans",
       "quantity": 12,
-      "available": true
+      "available": true,
+      "id" : 36
+    },
+    {
+      "name": "$25 Virtual Gift Card",
+      "url": "$25 Virtual Gift Card",
+      "quantity": 1,
+      "available": true,
+      "id" : 2
+    },
+    {
+      "name": "Computing and Internet",
+      "url": "Computing and Internet",
+      "quantity": 1,
+      "available": true,
+      "id" : 13
+    },
+    {
+      "name": "Black & White Diamond Heart",
+      "url": "Black & White Diamond Heart",
+      "quantity": 1,
+      "available": true,
+      "id" : 14
     }
   ]
 }
