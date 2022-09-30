@@ -66,9 +66,6 @@ public class CheckoutPage extends ProductAbstract{
     @FindBy(xpath = "//*[@id=\"payment-info-buttons-container\"]/input")
     WebElement purchaseOrderNumberContinueButton;
 
-    @FindBy(xpath = "//td[@class=\"product\"]//a")
-    WebElement productName;
-
     @FindBy(xpath = "//td[@class=\"a-center quantity\"]//span")
     WebElement quantity;
 
@@ -142,14 +139,6 @@ public class CheckoutPage extends ProductAbstract{
     @FindBy (xpath = "//div[@class=\"payment-details\"]/label[@for=\"paymentmethod_0\"]")
     WebElement paymentMethodCODLabel;
 
-    @FindBy(xpath = "//*[@id=\"BillingNewAddress_FirstName\"]")
-    WebElement billingFirstName;
-
-    @FindBy(xpath = "//*[@id=\"BillingNewAddress_LastName\"]")
-    WebElement billingLastName;
-
-    @FindBy(xpath = "//*[@id=\"BillingNewAddress_Email\"]")
-    WebElement email;
 
     public List<String> sneakersElements = SneakersProductPage.getList();
 

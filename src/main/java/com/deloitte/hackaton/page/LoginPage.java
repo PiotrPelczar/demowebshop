@@ -24,7 +24,6 @@ public class LoginPage extends UserAbstract{
     @FindBy(xpath = "//a[@href = \"/logout\"]")
     WebElement logoutButton;
 
-
     public LoginPage(WebDriver driver, JSONUserData userData){
         super(driver, userData);
     }

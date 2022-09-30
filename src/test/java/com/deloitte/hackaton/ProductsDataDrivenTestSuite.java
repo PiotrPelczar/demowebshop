@@ -16,7 +16,6 @@ import java.time.Duration;
 import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
-import static com.deloitte.hackaton.utils.TestFactory.startNewCustomerInfoTest;
 
 
 public class ProductsDataDrivenTestSuite {
@@ -32,13 +31,34 @@ public class ProductsDataDrivenTestSuite {
     void setup(){
         this.driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(8));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(8));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
     @AfterEach
     void tearDown() {
         this.driver.quit();
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("productsDataStream")
+    void testCheckoutWithoutAgreeing(JSONProductData productData) throws InterruptedException {
+        mainPage(driver, productData).navigateToMainPage();
+        boolean isEmpty = startNewCartTest(driver, productData).checkIfCartEmpty();
+        if(isEmpty){
+            startNewCartTest(driver, productData).deleteIfNotEmpty();
+        }
+        startNewProductTest(driver, productData)
+                .openProductPage()
+                .verifyProductName()
+                .verifyAvailability()
+                .selectQuantity()
+                .orderProduct()
+                .verifyNotification()
+                .goToCartPage()
+                .clickCheckoutButton()
+                .validateCheckout();
     }
 
     @ParameterizedTest
@@ -55,7 +75,7 @@ public class ProductsDataDrivenTestSuite {
         startNewCustomerInfoTest(driver, userData).openAddressPage();
         boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
         System.out.println(isTrue);
-        if (!isTrue == true) {
+        if (!isTrue) {
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()

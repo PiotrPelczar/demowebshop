@@ -1,7 +1,6 @@
 package com.deloitte.hackaton.page;
 
 import com.deloitte.hackaton.data.user.JSONUserData;
-import com.deloitte.hackaton.data.user.JSONUserList;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 

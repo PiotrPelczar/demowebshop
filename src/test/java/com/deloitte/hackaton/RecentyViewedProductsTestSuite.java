@@ -1,24 +1,15 @@
 package com.deloitte.hackaton;
 
-import com.deloitte.hackaton.data.JSONDataReader;
-import com.deloitte.hackaton.data.product.JSONProductData;
-import com.deloitte.hackaton.data.user.JSONUserData;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
-import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
-public class RecentyViewdProductsTestSuite {
+public class RecentyViewedProductsTestSuite {
 
     WebDriver driver;
 
@@ -37,9 +28,13 @@ public class RecentyViewdProductsTestSuite {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
     }
 
+    @AfterEach
+    void tearDown() {
+        this.driver.quit();
+    }
 
     @Test
-    void buyAProductAsRegistered() throws InterruptedException {
+    void buyAProductAsRegistered() {
         startNewJeweleryTest(driver)
                 .goToJewelry()
                 .BlackWhiteDiamond()

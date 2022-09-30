@@ -66,7 +66,6 @@ public class JSONDataReader {
         }
     }
 
-
     private static Resource getUsersFileFromClasspath() {
         return new ClassPathResource("/static/users.json");
     }
@@ -74,7 +73,6 @@ public class JSONDataReader {
     private static Resource getInvalidEmailFileFromClasspath() {
         return new ClassPathResource("/static/invalidEmails.json");
     }
-
 
     private static Resource getRegisterUsersFileFromClasspath(){
         return new ClassPathResource("/static/registerUsers.json");

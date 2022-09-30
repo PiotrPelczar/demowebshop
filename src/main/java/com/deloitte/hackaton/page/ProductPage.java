@@ -53,26 +53,26 @@ public class ProductPage extends ProductAbstract{
     WebElement prductNameField;
 
 
-
     JSONUserData userData;
 
-    public ProductPage(WebDriver driver) {
-        super(driver);
+    public ProductPage(WebDriver driver, JSONProductData productData, JSONUserData userData ) {
+        super(driver, productData);
+        this.userData = userData;
     }
 
-    public ProductPage(WebDriver driver, JSONProductData productData){
+    public ProductPage(WebDriver driver, JSONProductData productData) {
         super(driver, productData);
     }
-
-//    JSONProductData blueJeans = JSONDataReader.readProducts().getProducts().get(0);
-//    JSONProductData virtualGiftCard25$ = JSONDataReader.readProducts().getProducts().get(1);
-//    JSONProductData computingAndInternet = JSONDataReader.readProducts().getProducts().get(2);
-//    JSONProductData blackWhiteDiamondHeart = JSONDataReader.readProducts().getProducts().get(3);
-
 
     @Step
     public LoginPage login(){
         return new LoginPage(this.driver, this.userData);
+    }
+
+    @Step
+    public MainPage goBackToMainPage(){
+        driver.get("https://demowebshop.tricentis.com/");
+        return new MainPage(this.driver, this.productData, this.userData);
     }
 
     @Step("Open product page")

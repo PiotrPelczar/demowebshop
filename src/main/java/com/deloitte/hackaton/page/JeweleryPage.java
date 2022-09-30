@@ -1,18 +1,14 @@
 package com.deloitte.hackaton.page;
 
-import com.deloitte.hackaton.data.product.JSONProductData;
-import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JeweleryPage extends ProductAbstract {
 

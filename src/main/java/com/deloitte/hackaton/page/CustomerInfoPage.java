@@ -6,7 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -144,6 +144,8 @@ public class CustomerInfoPage extends UserAbstract{
             WebElement deleteButton = driver.findElement(By.xpath("//input[@value=\"Delete\"]"));
             deleteButton.click();
             driver.switchTo().alert().accept();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+            driver.navigate().refresh();
         }catch (NoSuchElementException e){
             System.out.println("No such element");
         }

@@ -1,7 +1,5 @@
 package com.deloitte.hackaton.page;
 
-import com.deloitte.hackaton.data.JSONDataReader;
-import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONInvalidEmails;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

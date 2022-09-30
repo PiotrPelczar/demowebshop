@@ -46,6 +46,11 @@ public class CartPage extends ProductAbstract{
     @FindBy(xpath = "//input[@name='updatecart']")
     WebElement updateCart;
 
+    @FindBy(xpath = "//div[@class=\"ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable\"]")
+    WebElement widget;
+
+    @FindBy(xpath = "//div[@id=\"terms-of-service-warning-box\"]//p")
+    WebElement errorMessage;
 
     public static List<String> productDataElements;
 
@@ -59,6 +64,10 @@ public class CartPage extends ProductAbstract{
     public CartPage(WebDriver driver,JSONUserData userData) {
         super(driver, userData);
         productDataElements = new ArrayList<>();
+    }
+
+    public CartPage(WebDriver driver, JSONProductData productData){
+        super(driver, productData);
     }
 
     public static List<String> getList(){
@@ -162,11 +171,25 @@ public class CartPage extends ProductAbstract{
         return this;
     }
 
+    @Step("Click checkout button")
+    public CartPage clickCheckoutButton(){
+        checkoutButton.click();
+        return this;
+    }
+
     @Step("Go to checkout")
     public CheckoutPage goToCheckout() throws InterruptedException {
         checkoutButton.click();
         Thread.sleep(500L);
         return new CheckoutPage(this.driver, this.productData, this.userData);
+    }
+
+    @Step("Verify checkout without accepting terms")
+    public CartPage validateCheckout(){
+        String display = widget.getCssValue("display");
+        assertEquals(display, "block");
+        assertEquals(errorMessage.getText(), "Please accept the terms of service before the next step.");
+        return this;
     }
 
 }

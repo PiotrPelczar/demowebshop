@@ -177,37 +177,6 @@ public class BuyProductsTestSuite {
                 .validateShippingInfo();
     }
 
-
-
-    @ParameterizedTest
-    @MethodSource(value = "usersDataStream")
-    void buyAProductAsARegisteredUser(JSONUserData userData) {
-        startNewLoginTest(driver, userData)
-                .openLoginPage()
-                .typeEmail()
-                .typePassword()
-                .logIn()
-                .verifyLogin();
-        startNewCustomerInfoTest(driver, userData).openAddressPage();
-        boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
-        System.out.println(isTrue);
-        if (!isTrue == true) {
-            startNewCustomerInfoTest(driver, userData)
-                    .clickOnAddNewButton()
-                    .typeFirstName()
-                    .typeLastName()
-                    .typeEmail()
-                    .selectCountry()
-                    .typeCity()
-                    .typeAddress1()
-                    .typePostalCode()
-                    .typePhoneNumber()
-                    .addAddress();
-        }
-        mainPage(driver, userData)
-                .navigateToMainPage();
-    }
-
     private static Stream<JSONUserData> usersDataStream () {
         return JSONDataReader.readUsers().getUsers().stream();
     }

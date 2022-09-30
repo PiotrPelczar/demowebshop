@@ -33,7 +33,6 @@ public abstract class ProductAbstract {
     }
 
 
-
     protected JSONProductData getProductData() {
         if (Objects.isNull(this.productData)) {
             throw new IllegalArgumentException("Product data must not be null!");
