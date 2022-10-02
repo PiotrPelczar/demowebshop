@@ -1,15 +1,16 @@
 package com.deloitte.hackaton;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
-public class RecentyViewedProductsTestSuite {
+public class QuantityOverloadTestSuite {
 
     WebDriver driver;
 
@@ -33,15 +34,14 @@ public class RecentyViewedProductsTestSuite {
         this.driver.quit();
     }
 
+
     @Test
-    void buyAProductAsRegistered() {
+    void moreThanA1000ItemsAdded() throws InterruptedException {
         startNewJeweleryTest(driver)
                 .goToJewelry()
-                .blackWhiteDiamond()
-                .diamondBracelet()
-                .diamondEarrings()
-                .vintageRing()
-                .presenceOfRecentlyViewdItems();
+                .viewBlackWhiteDiamond()
+                .addMoreThan10000pieces()
+                .validateQtyOverloadMessage();
 
     }
 
