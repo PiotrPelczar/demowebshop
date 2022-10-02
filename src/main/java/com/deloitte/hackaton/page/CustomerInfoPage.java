@@ -10,7 +10,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CustomerInfoPage extends UserAbstract{
+public class CustomerInfoPage extends UserAbstract {
 
     @FindBy(xpath = "//ul[@class=\"list\"]//a[@href=\"/customer/addresses\"]")
     WebElement addressesTab;
@@ -46,107 +46,120 @@ public class CustomerInfoPage extends UserAbstract{
     WebElement saveButton;
 
 
-    public CustomerInfoPage(WebDriver driver, JSONUserData userData){
-      super(driver, userData);
+    public CustomerInfoPage(WebDriver driver, JSONUserData userData) {
+        super(driver, userData);
     }
 
 
-
     @Step("Verify if user has any address saved")
-    public boolean verifyAddress(){
-        try{
+    public boolean verifyAddress() {
+        try {
             boolean addressBox = driver.findElements(By.xpath("//div[@class=\"address-list\"][contains(text(), \"No addresses\")]")).isEmpty();
             System.out.println(addressBox);
             return addressBox;
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println("Such element doesn't exist");
             return false;
         }
     }
 
     @Step("Open customer address page")
-    public CustomerInfoPage openAddressPage(){
+    public CustomerInfoPage openAddressPage() {
         driver.get("https://demowebshop.tricentis.com/customer/info");
         addressesTab.click();
         return this;
     }
 
     @Step("Click on add new address button")
-    public CustomerInfoPage clickOnAddNewButton(){
+    public CustomerInfoPage clickOnAddNewButton() {
         addNewAddressButton.click();
         return this;
     }
 
     @Step("Type first name")
-    public CustomerInfoPage typeFirstName(){
+    public CustomerInfoPage typeFirstName() {
         firstNameInput.sendKeys(userData.getFirstName());
         return this;
     }
 
     @Step("Type last name")
-    public CustomerInfoPage typeLastName(){
+    public CustomerInfoPage typeLastName() {
         lastNameInput.sendKeys(userData.getLastName());
         return this;
     }
 
     @Step("Type email address")
-    public CustomerInfoPage typeEmail(){
+    public CustomerInfoPage typeEmail() {
         emailInput.sendKeys(userData.getEmail());
         return this;
     }
 
     @Step("Select country")
-    public CustomerInfoPage selectCountry(){
+    public CustomerInfoPage selectCountry() {
         Select selectDropDown = new Select(countryDropdown);
         selectDropDown.selectByVisibleText(userData.getCountry());
         return this;
     }
 
     @Step("Type city")
-    public CustomerInfoPage typeCity(){
+    public CustomerInfoPage typeCity() {
         cityInput.sendKeys(userData.getCity());
         return this;
     }
 
     @Step("Type address 1")
-    public CustomerInfoPage typeAddress1(){
+    public CustomerInfoPage typeAddress1() {
         address1Input.sendKeys(userData.getAddress_1());
         return this;
     }
 
     @Step("Type postal code")
-    public CustomerInfoPage typePostalCode(){
+    public CustomerInfoPage typePostalCode() {
         zipPostalCodeInput.sendKeys(userData.getPostCode());
         return this;
     }
 
     @Step("Type phone number")
-    public CustomerInfoPage typePhoneNumber(){
+    public CustomerInfoPage typePhoneNumber() {
         phoneNumberInput.sendKeys(userData.getPhoneNumber());
         return this;
     }
 
     @Step("Add new address")
-    public CustomerInfoPage addAddress(){
+    public CustomerInfoPage addAddress() {
         saveButton.click();
         return this;
     }
 
     @Step("Verify if address has been added")
-    public CustomerInfoPage verifyIfAdded(){
+    public CustomerInfoPage verifyIfAdded() {
         assertEquals(driver.getCurrentUrl(), "https://demowebshop.tricentis.com/customer/addresses");
         return this;
     }
 
     @Step("Delete address")
-    public CustomerInfoPage deleteAddress() throws InterruptedException {
-        try{
+    public CustomerInfoPage deleteAddress() {
+        try {
             WebElement deleteButton = driver.findElement(By.xpath("//input[@value=\"Delete\"]"));
             deleteButton.click();
             driver.switchTo().alert().accept();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             driver.navigate().refresh();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        return this;
+    }
+
+    @Step("Delete billing address")
+    public CustomerInfoPage deleteBillingAddress() {
+        try {
+            WebElement deleteButton = driver.findElement(By.xpath("//div[@class=\"section address-item\"][2]//input[@value=\"Delete\"]"));
+            deleteButton.click();
+            driver.switchTo().alert().accept();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+            driver.navigate().refresh();
+        } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
         return this;

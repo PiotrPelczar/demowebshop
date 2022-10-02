@@ -122,8 +122,7 @@ public class ProductsDataDrivenTestSuite {
                 .confirm()
                 .validateProductDetails();
         startNewCustomerInfoTest(driver, userData).openAddressPage()
-                .deleteAddress()
-                .deleteAddress();
+                .deleteBillingAddress();
         startNewLoginTest(driver, userData)
                 .logOut()
                 .verifyIfLoggedOut();

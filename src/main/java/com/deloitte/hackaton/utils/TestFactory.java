@@ -45,12 +45,15 @@ public class TestFactory {
     public static ProductPage startNewProductTest(WebDriver driver, JSONProductData productData){
         return new ProductPage(driver, productData);
     }
+
     public static CartPage startNewCartTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
         return new CartPage(driver, productData, userData);
     }
+
     public static CartPage startNewCartTest(WebDriver driver, JSONUserData userData){
         return new CartPage(driver, userData);
     }
+
     public static CartPage startNewCartTest(WebDriver driver, JSONProductData productData){
         return new CartPage(driver, productData);
     }

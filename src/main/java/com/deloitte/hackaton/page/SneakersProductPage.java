@@ -2,6 +2,7 @@ package com.deloitte.hackaton.page;
 
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -67,7 +68,8 @@ public class SneakersProductPage extends UserAbstract {
     public CartPage addToCart() throws InterruptedException {
         addToCart.click();
         addToCartConfirmation.click();
-        goToCartButton.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", goToCartButton);
         Thread.sleep(500L);
         return new CartPage(this.driver, this.userData);
     }
