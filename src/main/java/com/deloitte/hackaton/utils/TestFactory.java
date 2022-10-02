@@ -61,5 +61,8 @@ public class TestFactory {
         return new JeweleryPage(driver);
     }
 
+    public static BooksPage startBooksTest(WebDriver driver){
+        return new BooksPage(driver);
+    }
 }
 
