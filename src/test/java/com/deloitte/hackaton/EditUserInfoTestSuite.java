@@ -50,6 +50,7 @@ public class EditUserInfoTestSuite {
                 .verifyLogin();
 
         startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
+        Thread.sleep(1000);
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()

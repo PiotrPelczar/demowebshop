@@ -117,9 +117,7 @@ public class ProductsDataDrivenTestSuite {
                 .validateShippingInfo()
                 .validateBillingInfoOnChange()
                 .confirm();
-
-        startNewLoginTest(driver, userData)
-                .logOut()
+        startNewLoginTest(driver, userData).logOut()
                 .verifyIfLoggedOut();
     }
 

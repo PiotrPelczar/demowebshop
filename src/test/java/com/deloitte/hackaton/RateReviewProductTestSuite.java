@@ -48,7 +48,9 @@ public class RateReviewProductTestSuite {
                 .openLoginPage()
                 .typeEmail()
                 .typePassword()
-                .logIn();
+                .logIn()
+                .verifyLogin();
+        Thread.sleep(1000);
 
         startNewProductTest(driver, productData, userData)
                 .openProductPage()
