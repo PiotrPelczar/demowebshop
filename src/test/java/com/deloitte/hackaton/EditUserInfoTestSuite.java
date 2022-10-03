@@ -41,7 +41,7 @@ public class EditUserInfoTestSuite {
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void addAndDeleteUserData(JSONUserData userData) throws InterruptedException {
+    void addAndDeleteUserData(JSONUserData userData){
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()

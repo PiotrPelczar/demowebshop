@@ -143,13 +143,14 @@ public class CustomerInfoPage extends UserAbstract {
     @Step("Delete all billing addresses")
     public CustomerInfoPage deleteAllAddresses(){
         try{
-            for(int i = 0; i<deleteButtons.size(); i++){
+            List<WebElement> deleteButtons = driver.findElements(By.cssSelector(".delete-address-button"));
+            for(int i =0; i<deleteButtons.size(); i++){
                 List<WebElement> deleteButton = driver.findElements(By.cssSelector(".delete-address-button"));
                 deleteButton.get(0).click();
                 driver.switchTo().alert().accept();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             }
-        }  catch (NoSuchElementException e) {
+        }catch (NoSuchElementException e){
             System.out.println("No such element");
         }
         return this;

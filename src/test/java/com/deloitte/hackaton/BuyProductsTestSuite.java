@@ -29,8 +29,8 @@ public class BuyProductsTestSuite {
     void setup() {
         this.driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
     @AfterEach
@@ -75,7 +75,6 @@ public class BuyProductsTestSuite {
                 .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
-                .validateProductDetails()
                 .validateBillingInfo()
                 .validateShippingInfo();
         startNewLoginTest(driver, userData)
