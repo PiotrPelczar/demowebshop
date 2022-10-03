@@ -73,9 +73,20 @@ public class TestFactory {
         return new ReOrderPage(driver, productData, userData);
     }
 
+
     public static BooksPage startBooksTest(WebDriver driver){
         return new BooksPage(driver);
     }
+
+
+    public static GiftCardsPage startGiftCardTest(WebDriver driver, JSONUserData userData){
+        return new GiftCardsPage(driver, userData);
+    }
+
+    public static SneakersProductPage startSneakersProductTest(WebDriver driver, JSONUserData userData){
+        return new SneakersProductPage(driver, userData);
+    }
+
 
 }
 

@@ -137,10 +137,42 @@ public class CheckoutPage extends ProductAbstract{
     @FindBy (xpath = "//div[@class=\"payment-details\"]/label[@for=\"paymentmethod_0\"]")
     WebElement paymentMethodCODLabel;
 
+    @FindBy (xpath = "//td[@class=\"a-right price\"]")
+    WebElement productPrice;
+
+    @FindBy (xpath = "//td[@class=\"a-center quantity\"]")
+    WebElement productQuantity;
+
+    @FindBy (xpath = "//td[@class=\"a-right total\"]")
+    WebElement totalPriceInDetails;
+
+    @FindBy (css = "tr:nth-child(1)>td.cart-total-right>span")
+    WebElement subTotal;
+
+    @FindBy (css = "tbody>tr:nth-child(2)>td.cart-total-right>span")
+    WebElement shippingCostInDetails;
+
+    @FindBy (css = "tr:nth-child(3)>td.cart-total-right>span")
+    WebElement paymentMethodAddFee;
+
+    @FindBy (css = "tr:nth-child(4)>td.cart-total-right>span")
+    WebElement taxDetails;
+
+
+    @FindBy (css = "tr:nth-child(3)>td.cart-total-right>span")
+    WebElement taxDetailsPOD;
+
+    @FindBy (xpath = "//table[@class=\"cart-total\"]/tbody/tr/td[@class=\"cart-total-right\"]/span[@class=\"nobr\"]//strong")
+    WebElement orderTotal;
+
+
+
 
     public List<String> sneakersElements = SneakersProductPage.getList();
 
     public List<String> productDataElements = CartPage.getList();
+
+    public List<String> productDetailsElements = MainPage.getList();
 
     List<String> checkoutInfoList = new ArrayList<>();
 
@@ -151,12 +183,14 @@ public class CheckoutPage extends ProductAbstract{
         this.userData = userData;
     }
 
+
+
     @Step("Click Order details and validate order")
     public CheckoutPage clickThroughPaymentMethods() {
         clickBillingAddress.click();
         clickShippingAddress.click();
         groundShippingMethod.click();
-        checkoutInfoList.add(shippingGroundLabel.getText());
+        checkoutInfoList.add(groundShippingMethod.getText());
         clickShippingMethod.click();
         paymentMethodCOD.click();
         checkoutInfoList.add(paymentMethodCODLabel.getText());
@@ -164,6 +198,7 @@ public class CheckoutPage extends ProductAbstract{
         clickPaymentInfo.click();
         return this;
     }
+
     @Step
     public CheckoutPage chooseNewBillingAddress(){
         Select billingAddressSelectDropdown = new Select(billingAddressSelect);
@@ -270,7 +305,6 @@ public class CheckoutPage extends ProductAbstract{
     public CheckoutPage validateShoesDetails(){
         assertTrue(sizeColorField.getText().contains(sneakersElements.get(0)));
         assertTrue(sizeColorField.getText().contains(sneakersElements.get(2)));
-        assertEquals(productNameField.getText(), sneakersElements.get(1));
         return this;
     }
 
@@ -291,4 +325,54 @@ public class CheckoutPage extends ProductAbstract{
         orderDetails.click();
         return this;
     }
+
+    @Step
+    public CheckoutPage checkProductDetails(){
+        assertEquals(productNameField.getText(), productDetailsElements.get(0));
+        assertEquals(productPrice.getText(), productDetailsElements.get(1));
+        assertEquals(productQuantity.getText(), productDetailsElements.get(2));
+        return this;
+    }
+
+
+
+    public CheckoutPage validateTotalCostsInDetailsIfCOD(){
+        String CODlabel =  checkoutInfoList.get(1);
+        String priceinCODStr = CODlabel.replaceAll("[^0-9]", "");
+        int priceInCOD = Integer.valueOf(priceinCODStr);
+        String totalPriceStr = totalPriceInDetails.getText().replaceAll("[^0-9]", "");
+        int totalPrice = Integer.valueOf(totalPriceStr);
+        String subTotalStr = subTotal.getText().replaceAll("[^0-9]", "");
+        int subTotal = Integer.valueOf(subTotalStr);
+        String shippingStr = shippingCostInDetails.getText().replaceAll("[^0-9]", "");
+        int shippingCost = Integer.valueOf(shippingStr);
+        String paymentMethodStr = paymentMethodAddFee.getText().replaceAll("[^0-9]", "");
+        int paymentMethod = Integer.valueOf(paymentMethodStr);
+        String taxStr = taxDetails.getText().replaceAll("[^0-9]", "");
+        int tax = Integer.valueOf(taxStr);
+        String orderTotalStr = orderTotal.getText().replaceAll("[^0-9]", "");
+        int orderTotal = Integer.valueOf(orderTotalStr);
+        assertEquals(priceInCOD, paymentMethod);
+        assertEquals(totalPrice, subTotal);
+        assertEquals(orderTotal, subTotal+shippingCost+priceInCOD+tax);
+        return this;
+    }
+
+    public CheckoutPage validateTotalCostsInDetailsIfPO(){
+        String totalPriceStr = totalPriceInDetails.getText().replaceAll("[^0-9]", "");
+        int totalPrice = Integer.valueOf(totalPriceStr);
+        String subTotalStr = subTotal.getText().replaceAll("[^0-9]", "");
+        int subTotal = Integer.valueOf(subTotalStr);
+        String shippingStr = shippingCostInDetails.getText().replaceAll("[^0-9]", "");
+        int shippingCost = Integer.valueOf(shippingStr);
+        String taxStr = taxDetailsPOD.getText().replaceAll("[^0-9]", "");
+        int tax = Integer.valueOf(taxStr);
+        String orderTotalStr = orderTotal.getText().replaceAll("[^0-9]", "");
+        int orderTotal = Integer.valueOf(orderTotalStr);
+        assertEquals(totalPrice, subTotal);
+        assertEquals(orderTotal, subTotal+shippingCost+tax);
+        return this;
+    }
+
+
 }

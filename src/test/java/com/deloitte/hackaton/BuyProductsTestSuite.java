@@ -33,10 +33,10 @@ public class BuyProductsTestSuite {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-    @AfterEach
-    void tearDown() {
-        this.driver.quit();
-    }
+//    @AfterEach
+//    void tearDown() {
+//        this.driver.quit();
+//    }
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
@@ -68,16 +68,20 @@ public class BuyProductsTestSuite {
         mainPage(driver, userData)
                 .navigateToMainPage()
                 .goToGiftCards()
-                .locatePhysicalGiftCard100$()
-                .provideInfoAndAddToCart()
-                .saveProductData()
+                .locatePhysicalGiftCard100$();
+        mainPage(driver, userData)
+                .getElementsFromProductDetails();
+        startGiftCardTest(driver, userData)
+                .provideInfoAndAddToCart();
+        startNewCartTest(driver, userData)
                 .selectUsersCountry()
                 .acceptTerms()
                 .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
                 .validateBillingInfo()
-                .validateShippingInfo();
+                .validateShippingInfo()
+                .validateTotalCostsInDetailsIfCOD();
         startNewLoginTest(driver, userData)
                 .logOut()
                 .verifyIfLoggedOut();
@@ -112,7 +116,10 @@ public class BuyProductsTestSuite {
         }
         mainPage(driver, userData)
                 .navigateToMainPage()
-                .searchForBlueAndGreenSneaker()
+                .searchForBlueAndGreenSneaker();
+        mainPage(driver, userData)
+                .getElementsFromProductDetails();
+        startSneakersProductTest(driver, userData)
                 .selectColor()
                 .selectSize()
                 .addToCart()
@@ -120,6 +127,7 @@ public class BuyProductsTestSuite {
                 .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
+                .validateTotalCostsInDetailsIfCOD()
                 .validateShoesDetails()
                 .validateBillingInfo()
                 .validateShippingInfo();
@@ -160,13 +168,17 @@ public class BuyProductsTestSuite {
         mainPage(driver, userData)
                 .navigateToMainPage()
                 .searchFor14laptop()
+                .getElementsFromProductDetails()
                 .laptop14inchAddToCart()
                 .acceptTerms()
                 .goToCheckout()
                 .clickThroughPaymentMethods()
                 .confirm()
                 .validateBillingInfo()
-                .validateShippingInfo();
+                .validateShippingInfo()
+                .checkProductDetails()
+                .validateTotalCostsInDetailsIfCOD();
+
     }
 
     private static Stream<JSONUserData> usersDataStream () {

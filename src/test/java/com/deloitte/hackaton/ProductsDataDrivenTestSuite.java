@@ -17,7 +17,9 @@ import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
+
 public class ProductsDataDrivenTestSuite {
+
     WebDriver driver;
 
     @BeforeAll
@@ -33,10 +35,10 @@ public class ProductsDataDrivenTestSuite {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-    @AfterEach
-    void tearDown() {
-        this.driver.quit();
-    }
+//    @AfterEach
+//    void tearDown() {
+//        this.driver.quit();
+//    }
 
 
     @ParameterizedTest
@@ -70,20 +72,18 @@ public class ProductsDataDrivenTestSuite {
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-
         startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
-
-        startNewCustomerInfoTest(driver, userData)
-                .clickOnAddNewButton()
-                .typeFirstName()
-                .typeLastName()
-                .typeEmail()
-                .selectCountry()
-                .typeCity()
-                .typeAddress1()
-                .typePostalCode()
-                .typePhoneNumber()
-                .addAddress();
+            startNewCustomerInfoTest(driver, userData)
+                    .clickOnAddNewButton()
+                    .typeFirstName()
+                    .typeLastName()
+                    .typeEmail()
+                    .selectCountry()
+                    .typeCity()
+                    .typeAddress1()
+                    .typePostalCode()
+                    .typePhoneNumber()
+                    .addAddress();
 
         boolean isEmpty = startNewCartTest(driver, productData, userData).checkIfCartEmpty();
         if(isEmpty){
@@ -95,15 +95,15 @@ public class ProductsDataDrivenTestSuite {
                 .verifyAvailability()
                 .selectQuantity()
                 .orderProduct()
-                .verifyNotification()
-                .goBackToMainPage()
+                .verifyNotification();
+        mainPage(driver, userData)
+                .getElementsFromProductDetails()
+                .navigateToMainPage()
                 .searchFor14laptop()
                 .laptop14inchAddToCart()
                 .goToCart()
                 .deleteProduct()
                 .updateCart()
-                .verifyProductName()
-                .verifyQuantity()
                 .selectCountry()
                 .selectState()
                 .acceptTerms()
@@ -116,8 +116,10 @@ public class ProductsDataDrivenTestSuite {
                 .typePurchaseOrderNumber()
                 .validateShippingInfo()
                 .validateBillingInfoOnChange()
-                .confirm();
-        startNewLoginTest(driver, userData).logOut()
+                .confirm()
+                .validateTotalCostsInDetailsIfPO();
+        startNewLoginTest(driver, userData)
+                .logOut()
                 .verifyIfLoggedOut();
     }
 

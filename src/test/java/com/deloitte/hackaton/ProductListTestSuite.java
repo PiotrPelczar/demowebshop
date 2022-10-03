@@ -2,15 +2,29 @@ package com.deloitte.hackaton;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.stream.Stream;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
 
+
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class ProductListTestSuite {
+
     WebDriver driver;
+
+
 
     @BeforeAll
     public static void before() {
@@ -33,7 +47,7 @@ public class ProductListTestSuite {
 
 
     @Test
-    void productListTests() {
+    void productListTests() throws InterruptedException {
         startBooksTest(driver)
                 .getToBooksPage()
                 .changeViewList()

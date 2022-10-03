@@ -172,18 +172,3 @@ public class BooksPage extends ProductAbstract {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

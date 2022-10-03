@@ -11,13 +11,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainPage extends ProductAbstract {
 
     JSONProductData productData;
 
+    public static List<String> listOfElementsInProductDetails;
+
     public MainPage(WebDriver driver, JSONUserData userData){
         super(driver, userData);
+        listOfElementsInProductDetails = new ArrayList<>();
+    }
+
+    public static List<String> getList(){
+        return listOfElementsInProductDetails;
     }
 
     public MainPage(WebDriver driver, JSONProductData productData){
@@ -35,10 +44,10 @@ public class MainPage extends ProductAbstract {
     @FindBy(id = "small-searchterms")
     WebElement searchField;
 
-    @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[1]/a/img")
+    @FindBy(xpath = "//div[@data-productid=\"28\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
     WebElement blueAndGreenSneaker;
 
-    @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[2]/h2/a")
+    @FindBy(xpath = "//div[@data-productid=\"31\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
     WebElement laptop14inch;
 
     @FindBy(id = "add-to-cart-button-31")
@@ -49,6 +58,15 @@ public class MainPage extends ProductAbstract {
 
     @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
     WebElement goToCartButton;
+
+    @FindBy (xpath = "//h1[@itemprop=\"name\"]")
+    WebElement nameInProductDetails;
+
+    @FindBy (xpath = "//span[@itemprop=\"price\"]")
+    WebElement priceInProductDetailsPage;
+
+    @FindBy (xpath = "//input[@data-val-number=\"The field Qty must be a number.\"]")
+    WebElement quantityInProductDetails;
 
 
     public MainPage navigateToMainPage() {
@@ -73,6 +91,14 @@ public class MainPage extends ProductAbstract {
         searchField.sendKeys("14.1-inch Laptop");
         searchField.sendKeys(Keys.RETURN);
         laptop14inch.click();
+        return this;
+    }
+
+    public MainPage getElementsFromProductDetails(){
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(nameInProductDetails));
+        listOfElementsInProductDetails.add(nameInProductDetails.getText());
+        listOfElementsInProductDetails.add(priceInProductDetailsPage.getText());
+        listOfElementsInProductDetails.add(quantityInProductDetails.getAttribute("value"));
         return this;
     }
 
