@@ -5,8 +5,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,6 +44,9 @@ public class CustomerInfoPage extends UserAbstract {
 
     @FindBy(xpath = "//input[@value =\"Save\"]")
     WebElement saveButton;
+
+    @FindBy(css = ".delete-address-button")
+    List<WebElement> deleteButtons;
 
 
     public CustomerInfoPage(WebDriver driver, JSONUserData userData) {
@@ -137,29 +140,16 @@ public class CustomerInfoPage extends UserAbstract {
         return this;
     }
 
-    @Step("Delete address")
-    public CustomerInfoPage deleteAddress() {
-        try {
-            WebElement deleteButton = driver.findElement(By.xpath("//input[@value=\"Delete\"]"));
-            deleteButton.click();
-            driver.switchTo().alert().accept();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-            driver.navigate().refresh();
-        } catch (NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-        return this;
-    }
-
-    @Step("Delete billing address")
-    public CustomerInfoPage deleteBillingAddress() {
-        try {
-            WebElement deleteButton = driver.findElement(By.xpath("//div[@class=\"section address-item\"][2]//input[@value=\"Delete\"]"));
-            deleteButton.click();
-            driver.switchTo().alert().accept();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-            driver.navigate().refresh();
-        } catch (NoSuchElementException e) {
+    @Step("Delete all billing addresses")
+    public CustomerInfoPage deleteAllAddresses(){
+        try{
+            for(int i = 0; i<deleteButtons.size(); i++){
+                List<WebElement> deleteButton = driver.findElements(By.cssSelector(".delete-address-button"));
+                deleteButton.get(0).click();
+                driver.switchTo().alert().accept();
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+            }
+        }  catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
         return this;

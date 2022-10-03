@@ -5,14 +5,9 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ContactUsLoginUserPage extends UserAbstract{
-    //Logger LOGGER = LoggerFactory.getLogger(ContactUsLoginUserPage.class);
-    public static final String RESULT = "Your enquiry has been successfully sent to the store owner.";
-    public static final String ATTRIBUTE = "value";
-    public static final String ENQUIRE_TEXT = "some text";
 
     @FindBy(xpath = "//a[@href = \"/contactus\"]")
     WebElement contactUsButton;
@@ -32,8 +27,9 @@ public class ContactUsLoginUserPage extends UserAbstract{
     @FindBy(xpath = "//div[@class = \"result\"]")
     WebElement result;
 
-    @FindBy(className = "account")
-    WebElement userInfo;
+    public static final String RESULT = "Your enquiry has been successfully sent to the store owner.";
+    public static final String ATTRIBUTE = "value";
+    public static final String ENQUIRE_TEXT = "some text";
 
     public ContactUsLoginUserPage(WebDriver driver, JSONUserData userData){
         super(driver, userData);
@@ -61,7 +57,7 @@ public class ContactUsLoginUserPage extends UserAbstract{
     @Step("Input enquire")
     public ContactUsLoginUserPage inputEnquire(){
         enquireInput.click();
-        assertEquals(true, enquireInput.getText().isEmpty());
+        assertTrue( enquireInput.getText().isEmpty());
         enquireInput.sendKeys(ENQUIRE_TEXT);
         return this;
     }

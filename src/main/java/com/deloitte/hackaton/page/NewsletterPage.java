@@ -24,7 +24,6 @@ public class NewsletterPage {
 
     WebDriver driver;
     JSONInvalidEmails invalidEmails;
-    String []mailData;
 
     public NewsletterPage(WebDriver driver, JSONInvalidEmails invalidEmails){
         this.driver = driver;
@@ -45,7 +44,6 @@ public class NewsletterPage {
         return this;
     }
 
-
     @Step("Find Newsletter text area and input incorrect mail")
     public NewsletterPage inputInvalidMail(){
         newsletterTextField.click();
@@ -60,17 +58,9 @@ public class NewsletterPage {
     }
 
     @Step("Error message is displayed")
-    public NewsletterPage errorMessage(){
-        try{
-            Thread.sleep(1000);
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-        System.out.println(errorMessage.getText());
+    public NewsletterPage errorMessage() throws  InterruptedException {
+        Thread.sleep(1000);
         assertTrue(errorMessage.getText().contains("Enter valid email"));
         return this;
     }
-
-
 }

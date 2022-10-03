@@ -21,7 +21,6 @@ import static com.deloitte.hackaton.utils.TestFactory.startNewReviewProductTest;
 public class RateReviewProductTestSuite {
     WebDriver driver;
 
-
     @BeforeAll
     public static void before() {
         WebDriverManager.chromedriver().setup();
@@ -39,7 +38,6 @@ public class RateReviewProductTestSuite {
     void tearDown() {
         this.driver.quit();
     }
-
 
     @ParameterizedTest
     @MethodSource("productsDataStream")

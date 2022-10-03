@@ -12,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.stream.Stream;
@@ -45,7 +44,6 @@ public class RegisterTestSuite {
 
     UserDataRandomizer userDataRandomizer;
 
-
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void register(JSONUserData userData) throws IOException {
@@ -64,7 +62,6 @@ public class RegisterTestSuite {
                 .logOut()
                 .verifyIfLoggedOut();
     }
-
 
     private static Stream<JSONUserData> usersDataStream() {
         return JSONDataReader.readRegisterUsers().getUsers().stream();

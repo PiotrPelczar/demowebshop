@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.time.Duration;
 import java.util.stream.Stream;
 
@@ -49,23 +48,20 @@ public class ReOrderTestSuite {
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-        startNewCustomerInfoTest(driver, userData).openAddressPage();
+        startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
 
-        boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
-        System.out.println(isTrue);
-        if (!isTrue) {
-            startNewCustomerInfoTest(driver, userData)
-                    .clickOnAddNewButton()
-                    .typeFirstName()
-                    .typeLastName()
-                    .typeEmail()
-                    .selectCountry()
-                    .typeCity()
-                    .typeAddress1()
-                    .typePostalCode()
-                    .typePhoneNumber()
-                    .addAddress();
-        }
+        startNewCustomerInfoTest(driver, userData)
+                .clickOnAddNewButton()
+                .typeFirstName()
+                .typeLastName()
+                .typeEmail()
+                .selectCountry()
+                .typeCity()
+                .typeAddress1()
+                .typePostalCode()
+                .typePhoneNumber()
+                .addAddress();
+
         boolean isEmpty = startNewCartTest(driver, productData, userData).checkIfCartEmpty();
         if(isEmpty){
             startNewCartTest(driver, productData, userData).deleteIfNotEmpty();

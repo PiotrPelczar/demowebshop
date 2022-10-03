@@ -23,7 +23,6 @@ public class SneakersProductPage extends UserAbstract {
         return listOfElements;
     }
 
-
     @FindBy(id = "product_attribute_28_7_10")
     WebElement sizeDropdown;
 

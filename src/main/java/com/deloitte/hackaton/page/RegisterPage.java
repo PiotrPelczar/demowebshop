@@ -8,7 +8,6 @@ import com.deloitte.hackaton.data.user.JSONUserData;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class RegisterPage extends UserAbstract{
 
     @FindBy(xpath = "//form[@action=\"/register\"]//input[@value=\"M\"]")
@@ -35,8 +34,6 @@ public class RegisterPage extends UserAbstract{
     public RegisterPage(WebDriver driver, JSONUserData userData){
        super(driver, userData);
     }
-
-
 
     @Step("Open register page")
     public RegisterPage openRegisterPage(){

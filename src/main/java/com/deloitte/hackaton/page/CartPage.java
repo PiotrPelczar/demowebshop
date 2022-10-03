@@ -60,7 +60,6 @@ public class CartPage extends ProductAbstract{
 
     public static List<String> productDataElements;
 
-
     public CartPage(WebDriver driver, JSONProductData productData, JSONUserData userData) {
         super(driver, productData);
         this.userData = userData;

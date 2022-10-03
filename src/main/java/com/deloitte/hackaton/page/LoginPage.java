@@ -28,7 +28,6 @@ public class LoginPage extends UserAbstract{
         super(driver, userData);
     }
 
-
     @Step("Open login page")
     public LoginPage openLoginPage(){
         driver.get("https://demowebshop.tricentis.com/login");
@@ -70,11 +69,9 @@ public class LoginPage extends UserAbstract{
     }
 
     @Step
-    public LoginPage verifyIfLoggedOut(){
+    public LoginPage verifyIfLoggedOut() {
         driver.get("https://demowebshop.tricentis.com/customer/info");
         assertTrue(driver.getCurrentUrl().contains("/login"));
         return this;
     }
-
-
 }

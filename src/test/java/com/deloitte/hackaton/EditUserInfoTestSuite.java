@@ -21,7 +21,6 @@ public class EditUserInfoTestSuite {
 
     WebDriver driver;
 
-
     @BeforeAll
     static void setupAll(){
         WebDriverManager.chromedriver().setup();
@@ -49,10 +48,8 @@ public class EditUserInfoTestSuite {
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-        startNewCustomerInfoTest(driver, userData).openAddressPage();
-        boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
-        System.out.println(isTrue);
-        if(!isTrue) {
+
+        startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()
@@ -65,9 +62,6 @@ public class EditUserInfoTestSuite {
                     .typePhoneNumber()
                     .addAddress()
                     .verifyIfAdded();
-        }
-            startNewCustomerInfoTest(driver, userData)
-                    .deleteAddress();
     }
 
     private static Stream<JSONUserData> usersDataStream() {

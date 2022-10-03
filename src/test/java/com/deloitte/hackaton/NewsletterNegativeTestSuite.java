@@ -39,11 +39,9 @@ public class NewsletterNegativeTestSuite {
         this.driver.quit();
     }
 
-
-
     @ParameterizedTest
     @MethodSource(value = "invalidEmailStream")
-    void newsletterNegative(JSONInvalidEmails invalidEmails){
+    void newsletterNegative(JSONInvalidEmails invalidEmails) throws InterruptedException {
         startNewNewsletterNegativeTest(driver, invalidEmails)
                 .openMainPage()
                 .inputInvalidMail()
@@ -54,6 +52,5 @@ public class NewsletterNegativeTestSuite {
     private static Stream<JSONInvalidEmails> invalidEmailStream() {
         return JSONDataReader.readInvalidEmail().getInvalidEmails().stream();
     }
-
 }
 

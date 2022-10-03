@@ -4,15 +4,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.time.Duration;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class RecentyViewedProductsTestSuite {
-
     WebDriver driver;
-
 
     @BeforeAll
     public static void before() {

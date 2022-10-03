@@ -5,9 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 
 public class ContactUsNonLoginUserPage extends UserAbstract{
 
@@ -64,10 +62,11 @@ public class ContactUsNonLoginUserPage extends UserAbstract{
     @Step("Input enquire")
     public ContactUsNonLoginUserPage inputEnquire(){
         enquireInput.click();
-        assertEquals(true, enquireInput.getText().isEmpty());
+        assertTrue(enquireInput.getText().isEmpty());
         enquireInput.sendKeys(ContactUsLoginUserPage.ENQUIRE_TEXT);
         return this;
     }
+
     @Step("Click submit button")
     public ContactUsNonLoginUserPage submit(){
         submitButton.click();

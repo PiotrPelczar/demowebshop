@@ -9,8 +9,6 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.springframework.core.io.*;
 import java.io.IOException;
 
-
-
 public class JSONDataReader {
 
     private static final ObjectMapper mapper = new ObjectMapper();

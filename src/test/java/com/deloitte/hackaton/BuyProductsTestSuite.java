@@ -20,7 +20,6 @@ public class BuyProductsTestSuite {
 
     WebDriver driver;
 
-
     @BeforeAll
     public static void before() {
         WebDriverManager.chromedriver().setup();
@@ -39,7 +38,6 @@ public class BuyProductsTestSuite {
         this.driver.quit();
     }
 
-
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void buyAPhysicalGiftCard(JSONUserData userData) throws InterruptedException {
@@ -49,10 +47,7 @@ public class BuyProductsTestSuite {
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-        startNewCustomerInfoTest(driver, userData).openAddressPage();
-        boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
-        System.out.println(isTrue);
-        if (!isTrue) {
+        startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()
@@ -64,7 +59,7 @@ public class BuyProductsTestSuite {
                     .typePostalCode()
                     .typePhoneNumber()
                     .addAddress();
-        }
+
         boolean isEmpty = startNewCartTest(driver, userData).checkIfCartEmpty();
         if(isEmpty){
             startNewCartTest(driver, userData).deleteIfNotEmpty();
@@ -97,10 +92,8 @@ public class BuyProductsTestSuite {
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-        startNewCustomerInfoTest(driver, userData).openAddressPage();
-        boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
-        System.out.println(isTrue);
-        if (!isTrue) {
+
+        startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()
@@ -112,7 +105,7 @@ public class BuyProductsTestSuite {
                     .typePostalCode()
                     .typePhoneNumber()
                     .addAddress();
-        }
+
         boolean isEmpty = startNewCartTest(driver, userData).checkIfCartEmpty();
         if(isEmpty){
             startNewCartTest(driver, userData).deleteIfNotEmpty();

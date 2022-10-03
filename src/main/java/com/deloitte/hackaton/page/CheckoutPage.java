@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class CheckoutPage extends ProductAbstract{
-
 
     @FindBy(xpath = "//*[@id=\"billing-address-select\"]")
     WebElement billingAddressSelect;
@@ -183,9 +181,6 @@ public class CheckoutPage extends ProductAbstract{
         address_1.sendKeys("address1");
         postCode.sendKeys("93-120");
         phoneNumber.sendKeys("123321123");
-//        billingDataList.add(billingFirstName.getText());
-//        billingDataList.add(billingLastName.getText());
-//        billingDataList.add(email.getText());
         billingDataList.add(city.getText());
         billingDataList.add(address_1.getText());
         billingDataList.add(postCode.getText());
@@ -284,7 +279,7 @@ public class CheckoutPage extends ProductAbstract{
     public CheckoutPage validateProductDetails(){
         var productNameText = productNameField.getText();
         assertTrue(productNameText.contains(productDataElements.get(0)));
-        var productQuantity = quantity.getText();
+        var productQuantity = quantity.getAttribute("value");
         assertEquals(productNameText, productDataElements.get(0));
         assertEquals(productQuantity, productDataElements.get(1));
         return this;

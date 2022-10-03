@@ -8,15 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductPage extends ProductAbstract{
 
-    List productNameList = new ArrayList<>();
     private static final String SUCCESS_NOTIFICATION = "The product has been added to your shopping cart";
 
     @FindBy(xpath = "//div[@class='product-name']")
@@ -37,25 +33,8 @@ public class ProductPage extends ProductAbstract{
     @FindBy(xpath = "//span[@class='cart-label']")
     WebElement cartLink;
 
-
     @FindBy(xpath = "//*[@id=\"product-details-form\"]//a[contains(text(), 'review(s)')]")
     WebElement review;
-
-    @FindBy(xpath = "//div[@data-productid=\"14\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
-    WebElement blackWhiteDiamond;
-
-    @FindBy(xpath = "//div[@data-productid=\"25\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
-    WebElement diamondEarrings;
-
-    @FindBy(xpath = "//div[@data-productid=\"26\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
-    WebElement diamondBracelet;
-
-    @FindBy(xpath = "//div[@data-productid=\"48\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
-    WebElement vintageRing;
-
-    @FindBy (xpath = "//h1[@itemprop=\"name\"]")
-    WebElement prductNameField;
-
 
     JSONUserData userData;
 
@@ -101,7 +80,6 @@ public class ProductPage extends ProductAbstract{
         if (expected){
             assertEquals("In stock", txt);
         }
-
         return this;
     }
 
@@ -142,7 +120,4 @@ public class ProductPage extends ProductAbstract{
         return this;
 
     }
-
-
-
 }

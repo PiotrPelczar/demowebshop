@@ -20,12 +20,9 @@ public class JeweleryPage extends ProductAbstract {
 
     List<String> listOfElements = new ArrayList<String>();
 
-
-
     public JeweleryPage(WebDriver driver) {
         super(driver);
     }
-
 
     @FindBy(xpath = "//div[@data-productid=\"14\"]/div[@class=\"details\"]/h2[@class=\"product-title\"]")
     WebElement blackWhiteDiamond;
@@ -47,8 +44,10 @@ public class JeweleryPage extends ProductAbstract {
 
     @FindBy (css = "div.block.block-recently-viewed-products > div.listbox > ul > li:nth-child(2) > a")
     WebElement recentlyViewed2;
+
     @FindBy (css = "div.block.block-recently-viewed-products > div.listbox > ul > li:nth-child(3) > a")
     WebElement recentlyViewed3;
+
     @FindBy (css = "div.block.block-recently-viewed-products > div.listbox > ul > li.last > a")
     WebElement recentlyViewed4;
 
@@ -60,7 +59,6 @@ public class JeweleryPage extends ProductAbstract {
 
     @FindBy (xpath = "//p[@class=\"content\"]")
     WebElement alertMessage;
-
 
 
     @Step("Click on some products and go to product details")
@@ -136,11 +134,5 @@ public class JeweleryPage extends ProductAbstract {
         assertEquals(alertMessage.getText(), expectedQtyOverloadMessage );
         return this;
     }
-
-    //p[@class="content"]
-
-
-
-
 }
 

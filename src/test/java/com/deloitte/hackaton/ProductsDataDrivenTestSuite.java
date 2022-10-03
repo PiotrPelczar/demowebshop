@@ -17,9 +17,7 @@ import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
-
 public class ProductsDataDrivenTestSuite {
-
     WebDriver driver;
 
     @BeforeAll
@@ -72,22 +70,21 @@ public class ProductsDataDrivenTestSuite {
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-        startNewCustomerInfoTest(driver, userData).openAddressPage();
-        boolean isTrue = startNewCustomerInfoTest(driver, userData).verifyAddress();
-        System.out.println(isTrue);
-        if (!isTrue) {
-            startNewCustomerInfoTest(driver, userData)
-                    .clickOnAddNewButton()
-                    .typeFirstName()
-                    .typeLastName()
-                    .typeEmail()
-                    .selectCountry()
-                    .typeCity()
-                    .typeAddress1()
-                    .typePostalCode()
-                    .typePhoneNumber()
-                    .addAddress();
-        }
+
+        startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
+
+        startNewCustomerInfoTest(driver, userData)
+                .clickOnAddNewButton()
+                .typeFirstName()
+                .typeLastName()
+                .typeEmail()
+                .selectCountry()
+                .typeCity()
+                .typeAddress1()
+                .typePostalCode()
+                .typePhoneNumber()
+                .addAddress();
+
         boolean isEmpty = startNewCartTest(driver, productData, userData).checkIfCartEmpty();
         if(isEmpty){
             startNewCartTest(driver, productData, userData).deleteIfNotEmpty();
@@ -119,10 +116,8 @@ public class ProductsDataDrivenTestSuite {
                 .typePurchaseOrderNumber()
                 .validateShippingInfo()
                 .validateBillingInfoOnChange()
-                .confirm()
-                .validateProductDetails();
-        startNewCustomerInfoTest(driver, userData).openAddressPage()
-                .deleteBillingAddress();
+                .confirm();
+
         startNewLoginTest(driver, userData)
                 .logOut()
                 .verifyIfLoggedOut();

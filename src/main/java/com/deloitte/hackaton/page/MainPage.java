@@ -47,7 +47,6 @@ public class MainPage extends ProductAbstract {
     @FindBy (xpath = "//p[@class=\"content\"]")
     WebElement addToCartConfirmation;
 
-
     @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
     WebElement goToCartButton;
 

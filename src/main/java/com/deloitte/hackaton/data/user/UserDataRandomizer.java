@@ -3,8 +3,6 @@ package com.deloitte.hackaton.data.user;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.andreinc.mockneat.MockNeat;
-
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

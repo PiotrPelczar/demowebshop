@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +34,7 @@ public class RateReviewPage extends ProductAbstract{
     }
 
     @Step("The review is helpfull, click yes, count of helpful vote has been change")
-    public RateReviewPage clickYseAndCheckCountOfVote(){
+    public RateReviewPage clickYseAndCheckCountOfVote() throws InterruptedException {
 
         WebElement newItemRandom = helpfulnessSection.stream()
                 .findAny()
@@ -84,14 +83,7 @@ public class RateReviewPage extends ProductAbstract{
         return this;
     }
 
-    void sleeping(){
-        try{
-            Thread.sleep(1000);
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
-
+    void sleeping() throws InterruptedException {
+        Thread.sleep(1000);
+     }
 }

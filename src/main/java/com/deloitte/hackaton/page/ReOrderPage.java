@@ -3,14 +3,11 @@ package com.deloitte.hackaton.page;
 import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReOrderPage extends ProductAbstract{
@@ -38,7 +35,6 @@ public class ReOrderPage extends ProductAbstract{
 
     String orderNumberString, getName, getPrice, getQuantity, getTotal;
     List<String> productData = CartPage.getList();
-
     JSONUserData userData;
 
     public ReOrderPage(WebDriver driver, JSONProductData productData, JSONUserData userData ) {

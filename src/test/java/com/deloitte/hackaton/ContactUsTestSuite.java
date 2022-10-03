@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class ContactUsTestSuite {
-
     WebDriver driver;
 
     @BeforeAll
@@ -67,13 +66,8 @@ public class ContactUsTestSuite {
                 .submit()
                 .verifySubmitEnquiry();
     }
-
-
-
-
     private static Stream<JSONUserData> usersDataStream() {
         return JSONDataReader.readUsers().getUsers().stream();
     }
-
 
 }

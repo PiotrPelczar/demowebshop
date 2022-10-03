@@ -1,32 +1,17 @@
 package com.deloitte.hackaton.page;
 
-import com.deloitte.hackaton.data.product.JSONProductData;
-import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BooksPage extends ProductAbstract {
-
-
-
-
-
-    public BooksPage(WebDriver driver) {
-        super(driver);
-    }
 
     @FindBy (css = "div.page-body > div.product-grid > div:nth-child(1) > div > div.picture > a > img")
     WebElement firstItemGrid;
@@ -43,17 +28,15 @@ public class BooksPage extends ProductAbstract {
     @FindBy (id = "products-viewmode")
     WebElement viewAs;
 
-    @FindBy (xpath = "//div[@class=\"product-item\"]")
-    WebElement productBox;
-
     @FindBy (id = "products-pagesize")
     WebElement productPageSize;
 
     @FindBy (id = "products-orderby")
     WebElement orderBy;
 
-
-
+    public BooksPage(WebDriver driver) {
+        super(driver);
+    }
 
     public BooksPage getToBooksPage(){
         driver.get("https://demowebshop.tricentis.com/books");
@@ -161,9 +144,6 @@ public class BooksPage extends ProductAbstract {
         return this;
     }
 
-
-
-
     @Step ("Test filtering products (e.g. Books by price)")
     public BooksPage filter() {
         boolean demo = true;
@@ -190,8 +170,6 @@ public class BooksPage extends ProductAbstract {
         }
         return this;
     }
-
-
 
 }
 

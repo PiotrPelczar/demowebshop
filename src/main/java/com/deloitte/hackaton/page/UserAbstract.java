@@ -3,7 +3,6 @@ package com.deloitte.hackaton.page;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.Objects;
 
 public abstract class UserAbstract {
