@@ -22,6 +22,12 @@ public class CartPage extends ProductAbstract{
     @FindBy(xpath = "//input[@class='qty-input']")
     WebElement quantity;
 
+    @FindBy(css = ".product-unit-price")
+    WebElement price;
+
+    @FindBy(css = ".product-subtotal")
+    WebElement totalPrice;
+
     @FindBy(xpath = "//a[@class='product-name']")
     WebElement itemName;
 
@@ -126,14 +132,16 @@ public class CartPage extends ProductAbstract{
     public CartPage verifyQuantity() {
         var txt = quantity.getAttribute("value");
         assertEquals(productData.getQuantity().toString(), txt);
-        productDataElements.add(quantity.getText());
+        productDataElements.add(quantity.getAttribute("value"));
         return this;
     }
 
     @Step("Verify product data")
     public CartPage saveProductData(){
         productDataElements.add(itemName.getText());
-        productDataElements.add(quantity.getText());
+        productDataElements.add(quantity.getAttribute("value"));
+        productDataElements.add(price.getText());
+        productDataElements.add(totalPrice.getText());
         return this;
     }
     @Step("Select country from dropdown")

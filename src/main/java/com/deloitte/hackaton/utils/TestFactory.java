@@ -61,8 +61,13 @@ public class TestFactory {
         return new JeweleryPage(driver);
     }
 
+    public static ReOrderPage startNewReOrderTest(WebDriver driver, JSONProductData productData, JSONUserData userData){
+        return new ReOrderPage(driver, productData, userData);
+    }
+
     public static BooksPage startBooksTest(WebDriver driver){
         return new BooksPage(driver);
     }
+
 }
 

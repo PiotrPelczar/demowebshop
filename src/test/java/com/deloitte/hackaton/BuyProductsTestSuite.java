@@ -135,7 +135,6 @@ public class BuyProductsTestSuite {
                 .verifyIfLoggedOut();
     }
 
-
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void buyANonCustomizableProduct(JSONUserData userData) throws InterruptedException {
