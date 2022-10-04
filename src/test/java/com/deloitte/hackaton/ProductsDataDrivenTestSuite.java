@@ -35,10 +35,10 @@ public class ProductsDataDrivenTestSuite {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-//    @AfterEach
-//    void tearDown() {
-//        this.driver.quit();
-//    }
+    @AfterEach
+    void tearDown() {
+        this.driver.quit();
+    }
 
 
     @ParameterizedTest

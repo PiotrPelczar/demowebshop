@@ -33,7 +33,7 @@ public class QuantityOverloadTestSuite {
 
 
     @Test
-    void moreThanA1000ItemsAdded() throws InterruptedException {
+    void moreThanA1000ItemsAdded(){
         startNewJeweleryTest(driver)
                 .goToJewelry()
                 .viewBlackWhiteDiamond()

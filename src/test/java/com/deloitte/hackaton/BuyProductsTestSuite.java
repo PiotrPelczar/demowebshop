@@ -33,10 +33,10 @@ public class BuyProductsTestSuite {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-//    @AfterEach
-//    void tearDown() {
-//        this.driver.quit();
-//    }
+    @AfterEach
+    void tearDown() {
+        this.driver.quit();
+    }
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
@@ -48,7 +48,6 @@ public class BuyProductsTestSuite {
                 .logIn()
                 .verifyLogin();
         startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
-        Thread.sleep(1000);
             startNewCustomerInfoTest(driver, userData)
                     .clickOnAddNewButton()
                     .typeFirstName()

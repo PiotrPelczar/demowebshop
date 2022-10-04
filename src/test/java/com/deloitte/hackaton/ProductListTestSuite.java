@@ -47,7 +47,7 @@ public class ProductListTestSuite {
 
 
     @Test
-    void productListTests() throws InterruptedException {
+    void productListTests(){
         startBooksTest(driver)
                 .getToBooksPage()
                 .changeViewList()
