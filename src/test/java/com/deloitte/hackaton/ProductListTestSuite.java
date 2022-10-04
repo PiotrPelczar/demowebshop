@@ -6,7 +6,7 @@ import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class ProductListTestSuite extends TestsSetup{
 
-    @Description "TC 31530. Product list tests"
+    @Description ("TC 31530. Product list tests")
     @Test
     void productListTests(){
         startBooksTest(driver)

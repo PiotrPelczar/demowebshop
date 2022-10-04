@@ -6,7 +6,7 @@ import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class QuantityOverloadTestSuite extends TestsSetup{
 
-    @Description "TC 31536. Negative scenario: validate if customer cannot purchase more than 10000 pieces of an item"
+    @Description ("TC 31536. Negative scenario: validate if customer cannot purchase more than 10000 pieces of an item")
     @Test
     void moreThanA1000ItemsAdded(){
         startNewJeweleryTest(driver)

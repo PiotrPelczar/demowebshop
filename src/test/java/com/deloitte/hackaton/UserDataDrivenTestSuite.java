@@ -3,6 +3,7 @@ package com.deloitte.hackaton;
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import com.deloitte.hackaton.data.user.UserDataRandomizer;
+import io.qameta.allure.Description;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class UserDataDrivenTestSuite extends TestsSetup{
 
     UserDataRandomizer userDataRandomizer;
 
+    @Description ("TC 31524. Register new user")
     @ParameterizedTest
     @MethodSource(value = "registerUsersDataStream")
     void register(JSONUserData userData) throws IOException {
@@ -34,6 +36,7 @@ public class UserDataDrivenTestSuite extends TestsSetup{
                 .verifyIfLoggedOut();
     }
 
+    @Description
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void login(JSONUserData userData){
@@ -47,6 +50,7 @@ public class UserDataDrivenTestSuite extends TestsSetup{
                 .verifyIfLoggedOut();
     }
 
+    @Description ("TC 31534. My account - Delete a postal address")
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void addAndDeleteUserData(JSONUserData userData) throws InterruptedException{

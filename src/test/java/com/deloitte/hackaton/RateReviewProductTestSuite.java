@@ -13,7 +13,7 @@ import static com.deloitte.hackaton.utils.TestFactory.startNewReviewProductTest;
 
 public class RateReviewProductTestSuite extends TestsSetup{
 
-    @Description "TC 31533. Rate a product review"
+    @Description ("TC 31533. Rate a product review")
     @ParameterizedTest
     @MethodSource("productsDataStream")
     void reviewsProduct(JSONProductData productData) throws InterruptedException {

@@ -12,7 +12,7 @@ import static com.deloitte.hackaton.utils.TestFactory.startNewNewsletterNegative
 public class NewsletterNegativeTestSuite extends TestsSetup{
 
 
-    @Description "TC 31535. Negative scenario: Incorrect e-mail when signing to newsletter"
+    @Description ("TC 31535. Negative scenario: Incorrect e-mail when signing to newsletter")
     @ParameterizedTest
     @MethodSource(value = "invalidEmailStream")
     void newsletterNegative(JSONInvalidEmails invalidEmails) throws InterruptedException {

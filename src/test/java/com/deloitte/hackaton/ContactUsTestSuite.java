@@ -11,7 +11,7 @@ import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class ContactUsTestSuite extends TestsSetup{
 
-    @Description "TC 31532. Test Contact Us option (unregistered user)"
+    @Description ("TC 31532. Test Contact Us option (unregistered user)")
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void contactUsNonLoginUser(JSONUserData userData){
@@ -25,7 +25,7 @@ public class ContactUsTestSuite extends TestsSetup{
                 .verifySubmitEnquiry();
     }
 
-    @Description "TC 31532. Test Contact Us option (registered user)"
+    @Description ("TC 31532. Test Contact Us option (registered user)")
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void contactUsLoginUser(JSONUserData userData){

@@ -14,7 +14,7 @@ import static com.deloitte.hackaton.utils.TestFactory.*;
 public class ProductsDataDrivenTestSuite extends TestsSetup{
 
 
-    @Description "TC 31537. Negative scenario: try to checkout without agreeing to terms of service"
+    @Description ("TC 31537. Negative scenario: try to checkout without agreeing to terms of service")
     @ParameterizedTest
     @MethodSource("productsDataStream")
     void testCheckoutWithoutAgreeing(JSONProductData productData) throws InterruptedException {
@@ -35,7 +35,7 @@ public class ProductsDataDrivenTestSuite extends TestsSetup{
                 .validateCheckout();
     }
 
-    @Description "TC 31529. Buy a product as a registered user"
+    @Description ("TC 31529. Buy a product as a registered user")
     @ParameterizedTest
     @MethodSource("productsDataStream")
     void buyAProductAsRegistered(JSONProductData productData) throws InterruptedException {
@@ -98,7 +98,7 @@ public class ProductsDataDrivenTestSuite extends TestsSetup{
     }
 
 
-    @Description "TC 31527. Buy physical gift card"
+    @Description ("TC 31527. Buy physical gift card")
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void buyAPhysicalGiftCard(JSONUserData userData) throws InterruptedException {
@@ -147,7 +147,7 @@ public class ProductsDataDrivenTestSuite extends TestsSetup{
                 .verifyIfLoggedOut();
     }
 
-    @Description "TC 31526. Buy a customizable product - happy path"
+    @Description ("TC 31526. Buy a customizable product - happy path")
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void buyACustomizableProduct(JSONUserData userData) throws InterruptedException {
@@ -197,7 +197,7 @@ public class ProductsDataDrivenTestSuite extends TestsSetup{
                 .verifyIfLoggedOut();
     }
 
-    @Description "TC 31525. Buy non-customizable product - happy path"
+    @Description ("TC 31525. Buy non-customizable product - happy path")
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
     void buyANonCustomizableProduct(JSONUserData userData) throws InterruptedException {
@@ -242,7 +242,7 @@ public class ProductsDataDrivenTestSuite extends TestsSetup{
                 .validateTotalCostsInDetailsIfCOD();
     }
 
-    @Description "TC 31531. Test Reorder button in Order Details"
+    @Description ("TC 31531. Test Reorder button in Order Details")
     @ParameterizedTest
     @MethodSource("productsDataStream")
     void reOrder(JSONProductData productData) throws InterruptedException {
