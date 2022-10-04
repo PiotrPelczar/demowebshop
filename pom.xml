@@ -44,6 +44,20 @@
         </dependency>
 
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide-junit4 -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide-junit4</artifactId>
+            <version>6.8.1</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>

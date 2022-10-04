@@ -116,8 +116,8 @@ public class ProductsDataDrivenTestSuite {
                 .typePurchaseOrderNumber()
                 .validateShippingInfo()
                 .validateBillingInfoOnChange()
-                .confirm()
-                .validateTotalCostsInDetailsIfPO();
+                .confirm();
+
         startNewLoginTest(driver, userData)
                 .logOut()
                 .verifyIfLoggedOut();

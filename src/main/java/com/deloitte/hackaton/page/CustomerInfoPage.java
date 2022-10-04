@@ -144,13 +144,16 @@ public class CustomerInfoPage extends UserAbstract {
     public CustomerInfoPage deleteAllAddresses(){
         try{
             List<WebElement> deleteButtons = driver.findElements(By.cssSelector(".delete-address-button"));
-            for(int i =0; i<deleteButtons.size(); i++){
+            for(int i = 0; i<deleteButtons.size(); i++){
+
                 List<WebElement> deleteButton = driver.findElements(By.cssSelector(".delete-address-button"));
                 deleteButton.get(0).click();
                 driver.switchTo().alert().accept();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             }
+
         }catch (NoSuchElementException e){
+
             System.out.println("No such element");
         }
         return this;

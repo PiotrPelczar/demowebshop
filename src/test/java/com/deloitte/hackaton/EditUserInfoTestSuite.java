@@ -41,7 +41,10 @@ public class EditUserInfoTestSuite {
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
-    void addAndDeleteUserData(JSONUserData userData) throws InterruptedException {
+
+    void addAndDeleteUserData(JSONUserData userData) throws InterruptedException{
+
+
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
@@ -50,19 +53,21 @@ public class EditUserInfoTestSuite {
                 .verifyLogin();
 
         startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
+
         Thread.sleep(1000);
-            startNewCustomerInfoTest(driver, userData)
-                    .clickOnAddNewButton()
-                    .typeFirstName()
-                    .typeLastName()
-                    .typeEmail()
-                    .selectCountry()
-                    .typeCity()
-                    .typeAddress1()
-                    .typePostalCode()
-                    .typePhoneNumber()
-                    .addAddress()
-                    .verifyIfAdded();
+
+        startNewCustomerInfoTest(driver, userData)
+                .clickOnAddNewButton()
+                .typeFirstName()
+                .typeLastName()
+                .typeEmail()
+                .selectCountry()
+                .typeCity()
+                .typeAddress1()
+                .typePostalCode()
+                .typePhoneNumber()
+                .addAddress()
+                .verifyIfAdded();
     }
 
     private static Stream<JSONUserData> usersDataStream() {

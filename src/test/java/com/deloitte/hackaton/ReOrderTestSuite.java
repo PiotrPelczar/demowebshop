@@ -7,33 +7,42 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 import java.util.stream.Stream;
 
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
-public class ReOrderTestSuite {
-    WebDriver driver;
+@ExtendWith(Screenshotter.class)
+public class ReOrderTestSuite{
+    static WebDriver driver;
 
     @BeforeAll
-    static void setupAll(){
+     static void setupAll(){
         WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+        Screenshotter.setDriver(driver);
     }
 
     @BeforeEach
     void setup(){
-        this.driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
+//  static ScreenShooterExtension screenshotEmAll = new ScreenShooterExtension(true).to("target/screenshots");
 
     @AfterEach
     void tearDown() {
+       // Utility.captureScreenshot(driver, getClass().toString());
+
         this.driver.quit();
     }
 
@@ -108,4 +117,5 @@ public class ReOrderTestSuite {
     private static Stream<JSONProductData> productsDataStream() {
         return JSONDataReader.readProducts().getProducts().stream();
     }
+
 }
