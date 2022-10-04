@@ -73,8 +73,8 @@ public class CustomerInfoPage extends UserAbstract {
     }
 
     @Step("Click on add new address button")
-    public CustomerInfoPage clickOnAddNewButton(){
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(addNewAddressButton));
+    public CustomerInfoPage clickOnAddNewButton() throws InterruptedException {
+        Thread.sleep(300L);
         addNewAddressButton.click();
         return this;
     }
@@ -129,7 +129,8 @@ public class CustomerInfoPage extends UserAbstract {
     }
 
     @Step("Add new address")
-    public CustomerInfoPage addAddress() {
+    public CustomerInfoPage addAddress() throws InterruptedException {
+        Thread.sleep(300L);
         saveButton.click();
         return this;
     }
@@ -146,10 +147,9 @@ public class CustomerInfoPage extends UserAbstract {
             List<WebElement> deleteButtons = driver.findElements(By.cssSelector(".delete-address-button"));
             for(int i = 0; i<deleteButtons.size(); i++){
                 List<WebElement> deleteButton = driver.findElements(By.cssSelector(".delete-address-button"));
-                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(deleteButton.get(0)));
+                new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(deleteButton.get(0)));
                 deleteButton.get(0).click();
                 driver.switchTo().alert().accept();
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             }
         }catch (NoSuchElementException e){
 

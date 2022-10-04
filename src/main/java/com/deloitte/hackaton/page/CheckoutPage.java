@@ -3,7 +3,6 @@ package com.deloitte.hackaton.page;
 import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
-import lombok.var;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
