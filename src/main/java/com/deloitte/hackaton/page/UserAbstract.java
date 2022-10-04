@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import java.util.Objects;
 
-public abstract class UserAbstract {
+public abstract class UserAbstract extends BaseUrl{
 
     protected WebDriver driver;
     protected JSONUserData userData;

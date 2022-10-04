@@ -2,60 +2,64 @@ package com.deloitte.hackaton;
 
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.user.JSONUserData;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import com.deloitte.hackaton.data.user.UserDataRandomizer;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.time.Duration;
+import java.io.IOException;
 import java.util.stream.Stream;
 
+import static com.deloitte.hackaton.utils.TestFactory.*;
 import static com.deloitte.hackaton.utils.TestFactory.startNewCustomerInfoTest;
-import static com.deloitte.hackaton.utils.TestFactory.startNewLoginTest;
 
-public class EditUserInfoTestSuite {
+public class UserDataDrivenTestSuite extends TestsSetup{
 
-    WebDriver driver;
 
-    @BeforeAll
-    static void setupAll(){
-        WebDriverManager.chromedriver().setup();
-    }
+    UserDataRandomizer userDataRandomizer;
 
-    @BeforeEach
-    void setup(){
-        this.driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(8));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(8));
-    }
-
-    @AfterEach
-    void tearDown() {
-        this.driver.quit();
+    @ParameterizedTest
+    @MethodSource(value = "registerUsersDataStream")
+    void register(JSONUserData userData) throws IOException {
+        userDataRandomizer.getRandomUser();
+        startNewUserTest(driver, userData)
+                .openRegisterPage()
+                .selectGender()
+                .typeFirstName()
+                .typeLastName()
+                .typeEmail()
+                .typePassword()
+                .repeatPassword()
+                .register()
+                .verifyRegistration();
+        startNewLoginTest(driver, userData)
+                .logOut()
+                .verifyIfLoggedOut();
     }
 
     @ParameterizedTest
     @MethodSource(value = "usersDataStream")
+    void login(JSONUserData userData){
+        startNewLoginTest(driver, userData)
+                .openLoginPage()
+                .typeEmail()
+                .typePassword()
+                .logIn()
+                .verifyLogin()
+                .logOut()
+                .verifyIfLoggedOut();
+    }
 
+    @ParameterizedTest
+    @MethodSource(value = "usersDataStream")
     void addAndDeleteUserData(JSONUserData userData) throws InterruptedException{
-
-
         startNewLoginTest(driver, userData)
                 .openLoginPage()
                 .typeEmail()
                 .typePassword()
                 .logIn()
                 .verifyLogin();
-
         startNewCustomerInfoTest(driver, userData).openAddressPage().deleteAllAddresses();
-
         Thread.sleep(1000);
-
         startNewCustomerInfoTest(driver, userData)
                 .clickOnAddNewButton()
                 .typeFirstName()
@@ -70,7 +74,13 @@ public class EditUserInfoTestSuite {
                 .verifyIfAdded();
     }
 
+
+    private static Stream<JSONUserData> registerUsersDataStream() {
+        return JSONDataReader.readRegisterUsers().getUsers().stream();
+    }
+
     private static Stream<JSONUserData> usersDataStream() {
         return JSONDataReader.readUsers().getUsers().stream();
     }
+
 }

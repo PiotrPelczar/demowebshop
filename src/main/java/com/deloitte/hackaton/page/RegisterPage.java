@@ -37,7 +37,7 @@ public class RegisterPage extends UserAbstract{
 
     @Step("Open register page")
     public RegisterPage openRegisterPage(){
-        driver.get("https://demowebshop.tricentis.com/register");
+        driver.get(getBaseUrl()+"register");
         return this;
     }
 

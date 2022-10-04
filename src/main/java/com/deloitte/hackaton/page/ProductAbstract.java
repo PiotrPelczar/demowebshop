@@ -7,13 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.Objects;
 
-public abstract class ProductAbstract {
+public abstract class ProductAbstract extends BaseUrl{
 
     protected WebDriver driver;
     protected JSONProductData productData;
-
     protected JSONUserData userData;
-
 
     public ProductAbstract(WebDriver driver, JSONProductData productData) {
         this.driver = driver;

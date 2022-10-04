@@ -34,14 +34,14 @@ public class ContactUsNonLoginUserPage extends UserAbstract{
 
     @Step("Open Main Page")
     public ContactUsNonLoginUserPage openMainPage(){
-        driver.get("https://demowebshop.tricentis.com");
+        driver.get(getBaseUrl());
         return this;
     }
 
     @Step("Find and open Contact Us page")
     public ContactUsNonLoginUserPage openContactUsPage(){
         contactUsButton.click();
-        assertEquals(driver.getCurrentUrl(), "https://demowebshop.tricentis.com/contactus");
+        assertEquals(driver.getCurrentUrl(), getBaseUrl()+"contactus");
         return this;
     }
 

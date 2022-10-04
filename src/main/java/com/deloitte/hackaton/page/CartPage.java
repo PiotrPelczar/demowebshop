@@ -119,21 +119,6 @@ public class CartPage extends ProductAbstract{
         return this;
     }
 
-    @Step("Assert if ordered product is correct")
-    public CartPage verifyProductName() {
-        var txt = itemName.getText();
-        assertTrue(txt.contains(productData.getName()));
-        productDataElements.add(itemName.getText());
-        return this;
-    }
-
-    @Step("Assert if ordered quantity is correct")
-    public CartPage verifyQuantity() {
-        var txt = quantity.getAttribute("value");
-        assertEquals(productData.getQuantity().toString(), txt);
-        productDataElements.add(quantity.getAttribute("value"));
-        return this;
-    }
 
     @Step("Verify product data")
     public CartPage saveProductData(){

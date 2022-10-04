@@ -30,7 +30,7 @@ public class LoginPage extends UserAbstract{
 
     @Step("Open login page")
     public LoginPage openLoginPage(){
-        driver.get("https://demowebshop.tricentis.com/login");
+        driver.get(getBaseUrl()+"login");
         return this;
     }
 
@@ -58,7 +58,7 @@ public class LoginPage extends UserAbstract{
     public LoginPage verifyLogin(){
         assertTrue(userInfo.isDisplayed());
         userInfo.click();
-        assertEquals(driver.getCurrentUrl(), "https://demowebshop.tricentis.com/customer/info");
+        assertEquals(driver.getCurrentUrl(), getBaseUrl()+"customer/info");
         return this;
     }
 
@@ -70,7 +70,7 @@ public class LoginPage extends UserAbstract{
 
     @Step
     public LoginPage verifyIfLoggedOut() {
-        driver.get("https://demowebshop.tricentis.com/customer/info");
+        driver.get(getBaseUrl()+"customer/info");
         assertTrue(driver.getCurrentUrl().contains("/login"));
         return this;
     }

@@ -70,7 +70,7 @@ public class MainPage extends ProductAbstract {
 
 
     public MainPage navigateToMainPage() {
-        driver.get("https://demowebshop.tricentis.com/");
+        driver.get(getBaseUrl());
         return this;
     }
 

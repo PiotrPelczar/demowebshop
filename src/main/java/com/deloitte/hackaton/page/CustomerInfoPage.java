@@ -4,7 +4,10 @@ import com.deloitte.hackaton.data.user.JSONUserData;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -45,10 +48,6 @@ public class CustomerInfoPage extends UserAbstract {
     @FindBy(xpath = "//input[@value =\"Save\"]")
     WebElement saveButton;
 
-    @FindBy(css = ".delete-address-button")
-    List<WebElement> deleteButtons;
-
-
     public CustomerInfoPage(WebDriver driver, JSONUserData userData) {
         super(driver, userData);
     }
@@ -68,13 +67,14 @@ public class CustomerInfoPage extends UserAbstract {
 
     @Step("Open customer address page")
     public CustomerInfoPage openAddressPage() {
-        driver.get("https://demowebshop.tricentis.com/customer/info");
+        driver.get(getBaseUrl()+"customer/info");
         addressesTab.click();
         return this;
     }
 
     @Step("Click on add new address button")
-    public CustomerInfoPage clickOnAddNewButton() {
+    public CustomerInfoPage clickOnAddNewButton(){
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(addNewAddressButton));
         addNewAddressButton.click();
         return this;
     }
@@ -136,7 +136,7 @@ public class CustomerInfoPage extends UserAbstract {
 
     @Step("Verify if address has been added")
     public CustomerInfoPage verifyIfAdded() {
-        assertEquals(driver.getCurrentUrl(), "https://demowebshop.tricentis.com/customer/addresses");
+        assertEquals(driver.getCurrentUrl(), getBaseUrl()+"customer/addresses");
         return this;
     }
 
@@ -145,13 +145,12 @@ public class CustomerInfoPage extends UserAbstract {
         try{
             List<WebElement> deleteButtons = driver.findElements(By.cssSelector(".delete-address-button"));
             for(int i = 0; i<deleteButtons.size(); i++){
-
                 List<WebElement> deleteButton = driver.findElements(By.cssSelector(".delete-address-button"));
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(deleteButton.get(0)));
                 deleteButton.get(0).click();
                 driver.switchTo().alert().accept();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             }
-
         }catch (NoSuchElementException e){
 
             System.out.println("No such element");

@@ -52,15 +52,9 @@ public class ProductPage extends ProductAbstract{
         return new LoginPage(this.driver, this.userData);
     }
 
-    @Step
-    public MainPage goBackToMainPage(){
-        driver.get("https://demowebshop.tricentis.com/");
-        return new MainPage(this.driver, this.productData, this.userData);
-    }
-
     @Step("Open product page")
     public ProductPage openProductPage(){
-        this.driver.get("https://demowebshop.tricentis.com/"+ getProductData().getUrl());
+        this.driver.get(getBaseUrl()+ getProductData().getUrl());
         return this;
     }
 
@@ -115,8 +109,7 @@ public class ProductPage extends ProductAbstract{
     @Step("Click on review link")
     public ProductPage goToReviewPage(){
         review.click();
-        assertEquals("https://demowebshop.tricentis.com/productreviews/" + getProductData().getId() , driver.getCurrentUrl());
+        assertEquals(getBaseUrl()+"productreviews/" + getProductData().getId() , driver.getCurrentUrl());
         return this;
-
     }
 }

@@ -309,16 +309,6 @@ public class CheckoutPage extends ProductAbstract{
     }
 
 
-    @Step
-    public CheckoutPage validateProductDetails(){
-        var productNameText = productNameField.getText();
-        assertTrue(productNameText.contains(productDataElements.get(0)));
-        var productQuantity = quantity.getAttribute("value");
-        assertEquals(productNameText, productDataElements.get(0));
-        assertEquals(productQuantity, productDataElements.get(1));
-        return this;
-    }
-
     @Step("Click Order details and validate order")
     public CheckoutPage confirm() {
         clickConfirmOrder.click();

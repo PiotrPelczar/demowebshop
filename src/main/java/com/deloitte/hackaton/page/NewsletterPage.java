@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NewsletterPage {
+public class NewsletterPage extends BaseUrl{
 
     @FindBy(id = "newsletter-email")
     WebElement newsletterTextField;
@@ -40,8 +40,9 @@ public class NewsletterPage {
 
     @Step("Open main page")
     public NewsletterPage openMainPage(){
-        driver.get("https://demowebshop.tricentis.com/");
+        driver.get(getBaseUrl());
         return this;
+
     }
 
     @Step("Find Newsletter text area and input incorrect mail")

@@ -39,7 +39,7 @@ public class BooksPage extends ProductAbstract {
     }
 
     public BooksPage getToBooksPage(){
-        driver.get("https://demowebshop.tricentis.com/books");
+        driver.get(getBaseUrl() + "books");
         return this;
     }
 

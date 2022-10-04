@@ -63,7 +63,7 @@ public class JeweleryPage extends ProductAbstract {
 
     @Step("Click on some products and go to product details")
     public JeweleryPage goToJewelry(){
-        driver.get("https://demowebshop.tricentis.com/jewelry");
+        driver.get(getBaseUrl()+"jewelry");
         return this;
     }
 
@@ -100,12 +100,9 @@ public class JeweleryPage extends ProductAbstract {
         return this;
     }
 
-
-
-
     @Step ("Go to main page and validate if those products appeared on the recently viewed product list")
     public JeweleryPage presenceOfRecentlyViewdItems(){
-        driver.get("https://demowebshop.tricentis.com/");
+        driver.get(getBaseUrl());
         assertEquals(recentlyViewed1.getText(), listOfElements.get(3));
         assertEquals(recentlyViewed2.getText(), listOfElements.get(2));
         assertEquals(recentlyViewed3.getText(), listOfElements.get(1));

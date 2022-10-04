@@ -45,7 +45,7 @@ public class ReOrderPage extends ProductAbstract{
     @Step("Open Orders Info")
     public ReOrderPage openOrdersInfo(){
         ordersButton.click();
-        assertEquals("https://demowebshop.tricentis.com/customer/orders", driver.getCurrentUrl());
+        assertEquals(getBaseUrl()+"customer/orders", driver.getCurrentUrl());
         return this;
     }
 
@@ -54,7 +54,7 @@ public class ReOrderPage extends ProductAbstract{
         WebElement firstItemDetailsButton = details.stream().findFirst().get();
         orderNumberString = firstItemDetailsButton.getText();
         firstItemDetailsButton.click();
-        assertTrue(driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/orderdetails/"));
+        assertTrue(driver.getCurrentUrl().contains(getBaseUrl()+"orderdetails/"));
         getName = productName.getText();
         getPrice = productPrice.getText();
         getQuantity = productQuantity.getText();
@@ -65,7 +65,7 @@ public class ReOrderPage extends ProductAbstract{
     @Step("Click on ReOrder button")
     public ReOrderPage clickOnReOrderButton(){
         reOrderButton.click();
-        assertEquals("https://demowebshop.tricentis.com/cart", driver.getCurrentUrl());
+        assertEquals(getBaseUrl()+"cart", driver.getCurrentUrl());
         return this;
     }
 

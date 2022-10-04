@@ -13,12 +13,12 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Screenshotter implements AfterTestExecutionCallback {
+public class ScreenShooter implements AfterTestExecutionCallback {
     private static final Logger LOG = LogManager.getLogger();
     static WebDriver driver;
 
     public static void setDriver(WebDriver driver) {
-        Screenshotter.driver = driver;
+        ScreenShooter.driver = driver;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class ContactUsLoginUserPage extends UserAbstract{
     @Step("Find and open Contact Us page")
     public ContactUsLoginUserPage openContactUsPage(){
         contactUsButton.click();
-        assertEquals(driver.getCurrentUrl(), "https://demowebshop.tricentis.com/contactus");
+        assertEquals(driver.getCurrentUrl(), getBaseUrl()+"contactus");
         return this;
     }
 
