@@ -36,5 +36,4 @@ public class TestsSetup {
     void tearDown() {
         this.driver.quit();
     }
-
 }

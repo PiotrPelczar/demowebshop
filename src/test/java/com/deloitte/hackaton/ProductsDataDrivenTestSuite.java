@@ -3,6 +3,7 @@ package com.deloitte.hackaton;
 import com.deloitte.hackaton.data.JSONDataReader;
 import com.deloitte.hackaton.data.product.JSONProductData;
 import com.deloitte.hackaton.data.user.JSONUserData;
+import io.qameta.allure.Description;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 import static com.deloitte.hackaton.utils.TestFactory.*;
 
 public class ProductsDataDrivenTestSuite extends TestsSetup{
+
     @ParameterizedTest
     @MethodSource("productsDataStream")
     void testCheckoutWithoutAgreeing(JSONProductData productData) throws InterruptedException {

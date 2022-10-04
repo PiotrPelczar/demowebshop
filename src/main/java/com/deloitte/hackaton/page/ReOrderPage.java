@@ -75,7 +75,6 @@ public class ReOrderPage extends ProductAbstract{
         assertEquals(getPrice, productData.get(2));
         assertEquals(getQuantity, productData.get(1));
         assertEquals(getTotal, productData.get(3));
-
         return this;
     }
 

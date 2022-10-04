@@ -5,7 +5,6 @@ import com.deloitte.hackaton.data.user.JSONUserData;
 import com.deloitte.hackaton.data.user.UserDataRandomizer;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.util.stream.Stream;
 
@@ -13,7 +12,6 @@ import static com.deloitte.hackaton.utils.TestFactory.*;
 import static com.deloitte.hackaton.utils.TestFactory.startNewCustomerInfoTest;
 
 public class UserDataDrivenTestSuite extends TestsSetup{
-
 
     UserDataRandomizer userDataRandomizer;
 
@@ -73,7 +71,6 @@ public class UserDataDrivenTestSuite extends TestsSetup{
                 .addAddress()
                 .verifyIfAdded();
     }
-
 
     private static Stream<JSONUserData> registerUsersDataStream() {
         return JSONDataReader.readRegisterUsers().getUsers().stream();
