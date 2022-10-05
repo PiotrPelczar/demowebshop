@@ -16,7 +16,7 @@ public class RateReviewProductTests extends TestsSetup{
     @Description ("TC 31533. Rate a product review")
     @ParameterizedTest
     @MethodSource("productsDataStream")
-    void reviewsProduct(JSONProductData productData) throws InterruptedException {
+    void productReviews(JSONProductData productData) throws InterruptedException {
         JSONUserData userData = JSONDataReader.readUsers().getUsers().get(0);
         startNewProductTest(driver, productData, userData)
                 .login()

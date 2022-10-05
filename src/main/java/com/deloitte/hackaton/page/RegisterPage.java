@@ -1,10 +1,15 @@
 package com.deloitte.hackaton.page;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import com.deloitte.hackaton.data.user.JSONUserData;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +35,12 @@ public class RegisterPage extends UserAbstract{
 
     @FindBy(xpath = "//*[@id=\"register-button\"]")
     WebElement registerButton;
+
+    @FindBy (xpath = "//input[@class=\"button-1 register-continue-button\"]")
+    WebElement registerContinueButton;
+
+    @FindBy (xpath = "//div[@class=\"result\"]")
+    WebElement registrationMessage;
 
     public RegisterPage(WebDriver driver, JSONUserData userData){
        super(driver, userData);

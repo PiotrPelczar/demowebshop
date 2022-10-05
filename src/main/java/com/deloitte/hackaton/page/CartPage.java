@@ -8,8 +8,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -170,8 +173,8 @@ public class CartPage extends ProductAbstract{
 
     @Step("Go to checkout")
     public CheckoutPage goToCheckout() throws InterruptedException {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(checkoutButton));
         checkoutButton.click();
-        Thread.sleep(500L);
         return new CheckoutPage(this.driver, this.productData, this.userData);
     }
 

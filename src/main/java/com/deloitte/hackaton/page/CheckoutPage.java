@@ -7,8 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -219,7 +222,7 @@ public class CheckoutPage extends ProductAbstract{
         billingDataList.add(address_1.getText());
         billingDataList.add(postCode.getText());
         billingDataList.add(phoneNumber.getText());
-        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(billingContinueButton));
         billingContinueButton.click();
         return this;
     }
@@ -227,7 +230,7 @@ public class CheckoutPage extends ProductAbstract{
     @Step
     public CheckoutPage selectShippingAddress() throws InterruptedException {
         shippingAddress.click();
-        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(shippingContinueButton));
         shippingContinueButton.click();
         return this;
     }
@@ -236,25 +239,26 @@ public class CheckoutPage extends ProductAbstract{
     public CheckoutPage selectShippingMethod() throws InterruptedException {
         groundShippingMethod.click();
         checkoutInfoList.add(groundShippingMethod.getText());
-        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(shippingMethodContinueButton));
         shippingMethodContinueButton.click();
         return this;
     }
 
     @Step
     public CheckoutPage selectPaymentMethod() throws InterruptedException {
-        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(paymentMethod));
         paymentMethod.click();
         checkoutInfoList.add(paymentMethod.getText());
-        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(paymentMethodContinueButton));
         paymentMethodContinueButton.click();
         return this;
     }
 
     @Step
     public CheckoutPage typePurchaseOrderNumber() throws InterruptedException {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(purchaseOrderNumber));
         purchaseOrderNumber.sendKeys("0001");
-        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(purchaseOrderNumberContinueButton));
         purchaseOrderNumberContinueButton.click();
         return this;
     }

@@ -74,7 +74,7 @@ public class CustomerInfoPage extends UserAbstract {
 
     @Step("Click on add new address button")
     public CustomerInfoPage clickOnAddNewButton() throws InterruptedException {
-        Thread.sleep(300L);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(addNewAddressButton));
         addNewAddressButton.click();
         return this;
     }
@@ -130,7 +130,7 @@ public class CustomerInfoPage extends UserAbstract {
 
     @Step("Add new address")
     public CustomerInfoPage addAddress() throws InterruptedException {
-        Thread.sleep(300L);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(saveButton));
         saveButton.click();
         return this;
     }

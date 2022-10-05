@@ -106,7 +106,7 @@ public class MainPage extends ProductAbstract {
         laptop14inchAddToCart.click();
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addToCartConfirmation));
         goToCartButton.click();
-        Thread.sleep(500L);
+        //Thread.sleep(500L);
         return new CartPage(this.driver, this.productData, this.userData);
     }
 

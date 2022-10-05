@@ -7,6 +7,10 @@ import lombok.var;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -94,7 +98,7 @@ public class ProductPage extends ProductAbstract{
     @Step("Assert if product is ordered")
     public ProductPage verifyNotification() throws InterruptedException {
         var txt = notificationBar.getText();
-        Thread.sleep(500L);
+     //   new WebDriverWait(driver, Duration.ofSeconds(4)).until(ExpectedConditions.visibilityOf(itemName));
         assertTrue(txt.contains(SUCCESS_NOTIFICATION));
         return this;
     }
@@ -102,7 +106,7 @@ public class ProductPage extends ProductAbstract{
     @Step("Open shopping cart page")
     public CartPage goToCartPage() throws InterruptedException {
         cartLink.click();
-        Thread.sleep(500L);
+   //     Thread.sleep(500L);
         return new CartPage(this.driver, this.productData, this.userData);
     }
 

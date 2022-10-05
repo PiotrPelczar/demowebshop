@@ -69,7 +69,7 @@ public class SneakersProductPage extends UserAbstract {
         addToCartConfirmation.click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", goToCartButton);
-        Thread.sleep(500L);
+      //  Thread.sleep(500L);
         return new CartPage(this.driver, this.userData);
     }
 }

@@ -6,7 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,7 +63,7 @@ public class NewsletterPage extends BaseUrl{
 
     @Step("Error message is displayed")
     public NewsletterPage errorMessage() throws  InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(500);
         assertTrue(errorMessage.getText().contains("Enter valid email"));
         return this;
     }

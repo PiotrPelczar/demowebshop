@@ -28,7 +28,7 @@ public class GiftCardsPage extends UserAbstract {
     @FindBy (xpath = "//p[@class=\"content\"]")
     WebElement addToCartConfirmation;
 
-    @FindBy(xpath = "/html/body/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[3]/div[4]/div/div[1]/a/img")
+    @FindBy(xpath = "//a[@href=\"/100-physical-gift-card\"]/img")
     WebElement physicalGiftCard100$;
 
     @FindBy(xpath = "//*[@id=\"topcartlink\"]/a/span[@class=\"cart-label\"]")
@@ -50,7 +50,7 @@ public class GiftCardsPage extends UserAbstract {
         addToCartConfirmation.click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", goToCartButton);
-        Thread.sleep(500L);
+        //Thread.sleep(500L);
         return new CartPage(this.driver, this.userData);
     }
 }
