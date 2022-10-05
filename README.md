@@ -1,20 +1,39 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+#Introduction
+Automating functional UI and end to end tests for https://demowebshop.tricentis.com/. Repository contains
+Selenium WebDriver and Junit5 tests on Chrome and Edge browser. All tests will run in headless mode
+by default.If any of the tests fails due to website instability simply rerun it.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+#Stack & Libraries
+- Java
+- Selenium WebDriver
+- Junit 5
+- Maven
+- Allure 
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+#Prerequisites
+- IDE
+- Maven
+- JDK 11+ 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+#How to run:
+1. git clone https://Deloitte-CE-IT@dev.azure.com/Deloitte-CE-IT/CE_SI_LAB_group_C/_git/CE_SI_LAB_group_C to your local folder
+2. Open cloned directory in IDE
+3. Open terminal
+4. Type mvn clean test to run the tests
+5. Type mvn clean test allure:report allure:serve to run the tests along with allure report
+
+
+#Project components
+- Page object models are located in the directory src/main/java/com/deloitte/hackaton/page
+- Test classes are located in the directory src/test/java/com/deloitte/hackaton
+- .json files are located in the directory src/main/resources/static
+
+
+#Highlights
+- This framework supports both Chrome and Edge browser.
+- Project uses WebDriverManager, an open source browser binary manager.
+- Screenshot on test failure: A screenshot of the active browser is captured and stored in the screenshots folder.
+- Allure reporting: After the test finishes, a visual report is generated for all the executed test cases from the suite
+
+
