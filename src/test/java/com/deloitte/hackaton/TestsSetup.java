@@ -8,6 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 import java.time.Duration;
 
@@ -16,16 +18,25 @@ public class TestsSetup {
 
     WebDriver driver;
 
+    String webDriver = "chrome";
+
     @BeforeAll
     static void setupAll(){
         WebDriverManager.chromedriver().setup();
+        WebDriverManager.edgedriver().setup();
     }
 
     @BeforeEach
     void setup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+        if(webDriver == "chrome"){
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
+        }else if(webDriver == "edge"){
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless");
+            driver = new EdgeDriver(options);
+        }
         ScreenShooter.setDriver(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

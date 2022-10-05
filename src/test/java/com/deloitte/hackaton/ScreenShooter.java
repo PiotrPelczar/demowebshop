@@ -1,5 +1,6 @@
 package com.deloitte.hackaton;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
@@ -31,7 +32,7 @@ public class ScreenShooter implements AfterTestExecutionCallback {
 
             File targetFile = new File("errorScreenshots/" + baseFileName + ".png");
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            Files.copy(scrFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            FileUtils.copyFile(scrFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
 
             targetFile.setReadable(true, false);
 
@@ -39,3 +40,4 @@ public class ScreenShooter implements AfterTestExecutionCallback {
         }
     }
 }
+

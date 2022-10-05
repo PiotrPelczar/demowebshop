@@ -1,7 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
       "name": "Blue Jeans",
       "url": "blue-jeans",
       "quantity": 12,
